@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DANNA'S SUPER QUEST 2026</title>
+    <title>DANNA'S ELITE QUEST 2026</title>
     <style>
         :root {
-            --bg: #eef5ff;
+            --bg: #f0f7ff;
             --purple: #9b6dff;
             --pink: #ff85a1;
-            --blue: #72a1ed;
+            --dark: #444;
             --white: #ffffff;
         }
 
         body {
             background-color: var(--bg);
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -26,239 +26,179 @@
         /* HEADER */
         .header {
             background: var(--white);
-            border: 6px solid var(--purple);
-            border-radius: 35px;
-            padding: 25px;
+            border: 8px solid var(--purple); /* Borde más grueso */
+            border-radius: 40px;
+            padding: 30px;
             width: 90%;
-            max-width: 800px;
+            max-width: 850px;
             position: relative;
             text-align: center;
-            box-shadow: 0 10px 0 var(--purple);
+            box-shadow: 0 12px 0 var(--purple);
             margin-bottom: 30px;
         }
 
-        .snoopy { position: absolute; right: 20px; top: 10px; width: 75px; }
+        #title {
+            font-family: 'Georgia', serif;
+            font-style: italic; /* Letra cursiva */
+            font-size: 2.5em;
+            margin: 10px 0;
+            outline: none;
+        }
 
-        /* CONTADOR Y PROGRESO */
-        .mix-box {
-            background: var(--white);
-            border: 5px solid var(--purple);
-            border-radius: 25px;
-            width: 85%;
-            max-width: 750px;
-            padding: 20px;
+        .snoopy { position: absolute; right: 25px; top: 15px; width: 85px; }
+
+        /* WIDGETS SUPERIORES */
+        .top-widgets {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 90%;
+            max-width: 850px;
             margin-bottom: 30px;
+        }
+
+        .widget {
+            background: white;
+            border: 6px solid var(--purple);
+            border-radius: 25px;
+            padding: 15px;
+            flex: 1;
+            min-width: 250px;
             text-align: center;
         }
 
-        .countdown-badge {
-            background: var(--pink);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 15px;
-            display: inline-block;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        /* LISTA DE TAREAS TACHABLES */
-        .todo-container {
-            text-align: left;
-            list-style: none;
-            padding: 0;
-        }
-
+        /* LISTA DE TAREAS MEJORADA */
         .todo-item {
             background: #f9f0ff;
-            margin: 5px 0;
-            padding: 10px;
-            border-radius: 10px;
-            cursor: pointer;
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: 0.2s;
-            border-left: 5px solid var(--purple);
+            border-left: 8px solid var(--purple);
+            font-weight: 500;
         }
 
-        .todo-item.completed {
-            text-decoration: line-through;
-            opacity: 0.5;
-            background: #eee;
-            border-left: 5px solid #aaa;
+        .todo-text { cursor: pointer; flex: 1; }
+        .todo-text.completed { text-decoration: line-through; opacity: 0.5; }
+        
+        .delete-btn {
+            color: white;
+            background: var(--pink);
+            border: none;
+            border-radius: 8px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
         }
 
-        /* DASHBOARD GRID */
+        /* GRID DEL DASHBOARD */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
             width: 95%;
-            max-width: 1100px;
+            max-width: 1200px;
         }
 
         section {
             background: var(--white);
-            border: 4px solid var(--purple);
-            border-radius: 25px;
+            border: 6px solid var(--purple); /* Bordes gruesos */
+            border-radius: 30px;
             padding: 20px;
+            box-shadow: 8px 8px 0 rgba(155, 109, 255, 0.15);
         }
 
-        .editable { outline: none; }
-        
-        /* JUEGO */
-        #game-canvas { background: #222; border-radius: 10px; display: block; margin: 10px auto; }
+        h2 { color: var(--purple); border-bottom: 3px dashed #eee; padding-bottom: 10px; font-size: 1.2em; }
+        .editable { outline: none; min-height: 120px; line-height: 1.6; }
+
+        /* BOTONES */
+        .btn-add {
+            background: var(--purple);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
         <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Snoopy_Peanuts.png" class="snoopy">
-        <h1 id="title" contenteditable="true">DANNA'S QUEST 2026</h1>
-        <div class="countdown-badge">🚀 FALTAN <span id="days-count">00</span> DÍAS</div>
-        <br><input type="date" id="exam-date" style="margin-top:10px; border:2px solid var(--purple); border-radius:10px; padding:5px;">
+        <h1 id="title" contenteditable="true">Danna's Quest 2026</h1>
+        <div style="font-weight: bold; color: var(--purple);">
+            FALTAN <span id="days-count">00</span> DÍAS | Examen: 
+            <input type="date" id="exam-date" style="border: 2px solid var(--purple); border-radius: 8px; font-family: inherit;">
+        </div>
     </div>
 
-    <div class="mix-box">
-        <div id="frase" contenteditable="true" style="font-style:italic; margin-bottom:15px;">"Tu frase de hoy aquí ✨"</div>
-        <div style="font-weight:bold;">Progreso: <span id="progreso-num" contenteditable="true">15</span>%</div>
-        <div style="background:#eee; height:20px; border-radius:10px; overflow:hidden; margin-top:10px; border:2px solid #ddd;">
-            <div id="barra" style="background:var(--purple); width:15%; height:100%; transition:0.5s;"></div>
+    <div class="top-widgets">
+        <div class="widget">
+            <div id="frase" contenteditable="true" style="font-style: italic;">"Haz que hoy cuente ✨"</div>
+        </div>
+        <div class="widget">
+            <b>Progreso General: <span id="progreso-num" contenteditable="true">10</span>%</b>
+            <div style="background:#eee; height:15px; border-radius:10px; margin-top:8px; border:2px solid #ddd; overflow:hidden;">
+                <div id="barra" style="background:var(--purple); width:10%; height:100%; transition:0.5s;"></div>
+            </div>
         </div>
     </div>
 
     <div class="grid">
         <section>
-            <h2 contenteditable="true">✅ TAREAS (Haz clic para tachar)</h2>
-            <div style="display:flex; gap:5px; margin-bottom:10px;">
-                <input type="text" id="todo-input" placeholder="Nueva tarea..." style="flex:1; padding:8px; border-radius:10px; border:2px solid #ddd;">
-                <button onclick="addTodo()" style="background:var(--purple); color:white; border:none; padding:10px; border-radius:10px; cursor:pointer;">+</button>
+            <h2 contenteditable="true">✅ TAREAS (Tachar/Borrar)</h2>
+            <div style="display:flex; gap:8px; margin-bottom:15px;">
+                <input type="text" id="todo-input" placeholder="Nueva tarea..." style="flex:1; padding:10px; border:2px solid #ddd; border-radius:12px;">
+                <button class="btn-add" onclick="addTodo()">Añadir</button>
             </div>
-            <ul id="todo-list" class="todo-container"></ul>
+            <div id="todo-list"></div>
         </section>
 
         <section>
-            <h2 contenteditable="true">📚 APUNTES MATERIAS</h2>
-            <div id="materias" contenteditable="true" class="editable">
-                <b>• Química:</b> Repasar tabla periódica<br>
-                <b>• Matemáticas:</b> Logaritmos
+            <h2 contenteditable="true">💰 CONTROL DE COSTOS</h2>
+            <div class="editable" id="costos" contenteditable="true">
+                • Pin UdeA: $74.000 <br>
+                • Pin ICFES: $ <br>
+                • Otros: $
             </div>
         </section>
 
         <section>
-            <h2 contenteditable="true">📊 SIMULACROS</h2>
-            <div id="simulacros" contenteditable="true" class="editable">
-                • Feb 20: 340 puntos<br>
-                • Mar 05: ...
-            </div>
+            <h2 contenteditable="true">📝 APUNTES: ICFES</h2>
+            <div class="editable" id="apuntes-icfes" contenteditable="true">Escribe tus temas clave aquí...</div>
         </section>
 
-        <section style="text-align:center;">
-            <h2>🎮 SNAKE BREAK</h2>
-            <canvas id="game-canvas" width="280" height="200"></canvas>
-            <button onclick="startGame()" style="background:var(--purple); color:white; border:none; padding:8px 15px; border-radius:10px; cursor:pointer;">Jugar</button>
+        <section>
+            <h2 contenteditable="true">🎓 APUNTES: UdeA / ADMISIÓN</h2>
+            <div class="editable" id="apuntes-udea" contenteditable="true">Lógica y competencia lectora...</div>
+        </div>
+
+        <section>
+            <h2 contenteditable="true">🏫 APUNTES: COLEGIO</h2>
+            <div class="editable" id="apuntes-cole" contenteditable="true">Pendientes de materias del cole...</div>
+        </section>
+
+        <section>
+            <h2 contenteditable="true">📊 PUNTAJES SIMULACROS</h2>
+            <div class="editable" id="simulacros" contenteditable="true">
+                <b>Meta: 350+</b><br>
+                • Simulacro 1: <br>
+                • Simulacro 2: 
+            </div>
         </section>
     </div>
 
     <script>
-        // --- GUARDADO Y FUNCIONES ---
-        const ids = ['title', 'frase', 'progreso-num', 'exam-date', 'materias', 'simulacros'];
+        const ids = ['title', 'frase', 'progreso-num', 'exam-date', 'costos', 'apuntes-icfes', 'apuntes-udea', 'apuntes-cole', 'simulacros'];
         
         window.onload = () => {
             ids.forEach(id => {
                 const saved = localStorage.getItem(id);
                 if(saved) {
                     if(id === 'exam-date') document.getElementById(id).value = saved;
-                    else document.getElementById(id).innerHTML = saved;
-                }
-            });
-            loadTodos();
-            updateBar();
-            updateCountdown();
-        };
-
-        // Guardar al escribir
-        document.addEventListener('input', (e) => {
-            if(ids.includes(e.target.id)) {
-                localStorage.setItem(e.target.id, e.target.value || e.target.innerHTML);
-                if(e.target.id === 'progreso-num') updateBar();
-                if(e.target.id === 'exam-date') updateCountdown();
-            }
-        });
-
-        function updateBar() {
-            let n = parseInt(document.getElementById('progreso-num').innerText) || 0;
-            document.getElementById('barra').style.width = n + '%';
-        }
-
-        function updateCountdown() {
-            const date = document.getElementById('exam-date').value;
-            if(!date) return;
-            const diff = new Date(date) - new Date();
-            document.getElementById('days-count').innerText = Math.max(0, Math.ceil(diff / (1000*60*60*24)));
-        }
-
-        // --- LÓGICA DE TAREAS (TODO LIST) ---
-        function addTodo() {
-            const input = document.getElementById('todo-input');
-            if(!input.value) return;
-            const task = { text: input.value, completed: false };
-            const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-            tasks.push(task);
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-            input.value = '';
-            renderTodos();
-        }
-
-        function toggleTodo(index) {
-            const tasks = JSON.parse(localStorage.getItem('tasks'));
-            tasks[index].completed = !tasks[index].completed;
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-            renderTodos();
-        }
-
-        function renderTodos() {
-            const list = document.getElementById('todo-list');
-            const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-            list.innerHTML = tasks.map((t, i) => `
-                <li class="todo-item ${t.completed ? 'completed' : ''}" onclick="toggleTodo(${i})">
-                    ${t.text} <span>${t.completed ? '✓' : '○'}</span>
-                </li>
-            `).join('');
-        }
-
-        function loadTodos() { renderTodos(); }
-
-        // --- JUEGO SNAKE (Simplificado para el espacio) ---
-        const canvas = document.getElementById("game-canvas");
-        const ctx = canvas.getContext("2d");
-        let snake, food, d, game;
-
-        function startGame() {
-            clearInterval(game);
-            snake = [{x: 10, y: 10}];
-            d = "RIGHT";
-            food = {x: Math.floor(Math.random()*27), y: Math.floor(Math.random()*19)};
-            game = setInterval(draw, 120);
-        }
-
-        function draw() {
-            ctx.fillStyle = "#222"; ctx.fillRect(0,0,280,200);
-            ctx.fillStyle = "#9b6dff"; snake.forEach(s => ctx.fillRect(s.x*10, s.y*10, 9, 9));
-            ctx.fillStyle = "#ff85a1"; ctx.fillRect(food.x*10, food.y*10, 9, 9);
-            let h = {...snake[0]};
-            if(d=="RIGHT") h.x++; if(d=="LEFT") h.x--; if(d=="UP") h.y--; if(d=="DOWN") h.y++;
-            if(h.x==food.x && h.y==food.y) food = {x: Math.floor(Math.random()*27), y: Math.floor(Math.random()*19)};
-            else snake.pop();
-            if(h.x<0 || h.x>27 || h.y<0 || h.y>19) clearInterval(game);
-            else snake.unshift(h);
-        }
-        document.addEventListener("keydown", e => {
-            if(e.key=="ArrowLeft" && d!="RIGHT") d="LEFT";
-            if(e.key=="ArrowUp" && d!="DOWN") d="UP";
-            if(e.key=="ArrowRight" && d!="LEFT") d="RIGHT";
-            if(e.key=="ArrowDown" && d!="UP") d="DOWN";
-        });
-    </script>
-</body>
-</html>
