@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DANNA'S COQUETTE QUEST 2026</title>
+    <title>DANNA'S ELITE DASHBOARD 2026</title>
     <style>
         :root {
             --purple: #9b6dff;
             --pink: #ff85a1;
-            --soft-pink: #fff0f3;
-            --white: rgba(255, 255, 255, 0.9);
+            --white: rgba(255, 255, 255, 0.92);
         }
 
         body {
-            /* Fondo de flores sutil */
-            background-color: #ffeef2;
-            background-image: url('https://www.transparenttextures.com/patterns/floral-paper.png'); 
+            /* TU FONDO DE FLORES */
+            background-image: url('https://img.freepik.com/vector-gratis/acuarela-floral-monocromatica-fondo_23-2148302335.jpg?semt=ais_user_personalization&w=740&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
             font-family: 'Segoe UI', sans-serif;
             margin: 0; padding: 20px;
             display: flex; flex-direction: column; align-items: center;
@@ -28,15 +29,26 @@
             padding: 30px; width: 95%; max-width: 1100px;
             position: relative; text-align: center;
             box-shadow: 0 12px 0 var(--purple); margin-bottom: 30px;
-            backdrop-filter: blur(5px);
         }
 
         #title {
             font-family: 'Georgia', serif; font-style: italic;
-            font-size: 2.8em; margin: 10px 0; outline: none; color: #444;
+            font-size: 2.8em; margin: 10px 0; outline: none; color: #333;
         }
 
         .snoopy { position: absolute; right: 30px; top: 15px; width: 85px; }
+
+        /* SECCIÓN DE ATAJOS */
+        .shortcuts {
+            display: flex; gap: 15px; justify-content: center; margin-bottom: 25px; flex-wrap: wrap;
+        }
+        .shortcut-btn {
+            background: var(--white); border: 4px solid var(--purple);
+            padding: 10px 20px; border-radius: 20px; text-decoration: none;
+            color: var(--purple); font-weight: bold; transition: 0.3s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .shortcut-btn:hover { transform: translateY(-5px); background: var(--purple); color: white; }
 
         .main-grid {
             display: grid;
@@ -48,31 +60,32 @@
             background: var(--white);
             border: 7px solid var(--purple);
             border-radius: 30px; padding: 20px;
-            box-shadow: 8px 8px 0 rgba(155, 109, 255, 0.1);
+            box-shadow: 8px 8px 0 rgba(155, 109, 255, 0.15);
         }
 
         h2 { color: var(--purple); border-bottom: 4px dashed #eee; padding-bottom: 10px; font-size: 1.1em; text-align: center; margin-top: 0; outline: none; }
 
-        /* TABLAS MEJORADAS */
+        /* TABLAS */
         table { width: 100%; border-collapse: collapse; font-size: 0.85em; margin-bottom: 10px; }
-        th { background: var(--purple); color: white; padding: 8px; border-radius: 5px; }
+        th { background: var(--purple); color: white; padding: 8px; }
         td { border-bottom: 1px solid #ddd; padding: 8px; text-align: center; outline: none; }
 
-        .btn-add-row {
-            background: var(--pink); color: white; border: none; padding: 5px 10px;
-            border-radius: 10px; cursor: pointer; font-size: 0.8em; width: 100%;
+        .btn-action {
+            background: var(--pink); color: white; border: none; padding: 5px 12px;
+            border-radius: 12px; cursor: pointer; font-size: 0.8em; margin: 5px 0;
         }
 
-        /* MOOD TRACKER */
-        .mood-box { display: flex; justify-content: space-around; font-size: 1.5em; margin-top: 10px; }
-        .mood-btn { cursor: pointer; transition: 0.3s; filter: grayscale(1); }
-        .mood-btn:hover, .mood-btn.active { filter: grayscale(0); transform: scale(1.2); }
+        /* TAREAS */
+        .task-item {
+            display: flex; justify-content: space-between; background: #fff5f8;
+            margin: 5px 0; padding: 10px; border-radius: 12px; border-left: 5px solid var(--purple);
+        }
 
         /* PROGRESO */
         .progreso-container {
-            margin-top: 20px; background: var(--white); padding: 20px;
-            border: 8px solid var(--purple); border-radius: 30px;
-            width: 90%; max-width: 400px; text-align: center;
+            margin-top: 30px; background: var(--white); padding: 20px;
+            border: 8px solid var(--purple); border-radius: 35px;
+            width: 90%; max-width: 450px; text-align: center;
         }
 
         @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
@@ -83,183 +96,55 @@
     <div class="header">
         <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Snoopy_Peanuts.png" class="snoopy">
         <h1 id="title" contenteditable="true">Danna's Elite Quest 2026</h1>
-        <div style="font-weight: bold; font-size: 1.1em;">
-            <span contenteditable="true">CUENTA REGRESIVA:</span> <span id="days-count">00</span> DÍAS
+        <div style="font-weight: bold;">
+            <span contenteditable="true">DÍAS RESTANTES:</span> <span id="days-count">00</span>
             <br>
-            <input type="date" id="exam-date" style="border: 2px solid var(--purple); border-radius: 8px; margin-top: 5px;">
+            <input type="date" id="exam-date" style="border: 3px solid var(--purple); border-radius: 10px; padding: 5px; margin-top: 10px;">
         </div>
+    </div>
+
+    <div class="shortcuts">
+        <a href="https://www.youtube.com" target="_blank" class="shortcut-btn">📺 YouTube</a>
+        <a href="https://www.canva.com" target="_blank" class="shortcut-btn">🎨 Canva</a>
+        <a href="https://chatgpt.com" target="_blank" class="shortcut-btn">🤖 ChatGPT</a>
+        <a href="https://www.notion.so" target="_blank" class="shortcut-btn">📝 Notion</a>
     </div>
 
     <div class="main-grid">
         <section>
             <h2 contenteditable="true">✅ COLEGIO</h2>
-            <input type="text" id="in-cole" placeholder="Nueva tarea..." style="width:70%; padding:5px; border-radius:5px; border:1px solid #ddd;">
-            <button onclick="addTask('cole')" style="background:var(--purple); color:white; border:none; padding:5px 10px; border-radius:5px;">+</button>
+            <div style="display:flex; gap:5px; margin-bottom:10px;">
+                <input type="text" id="in-cole" placeholder="Tarea..." style="flex:1; border-radius:8px; border:1px solid #ddd; padding:5px;">
+                <button onclick="addTask('cole')" class="btn-action" style="background:var(--purple);">+</button>
+            </div>
             <div id="list-cole"></div>
         </section>
 
         <section>
             <h2 contenteditable="true">🚀 PRE-U / UdeA</h2>
-            <input type="text" id="in-pre" placeholder="Nueva tarea..." style="width:70%; padding:5px; border-radius:5px; border:1px solid #ddd;">
-            <button onclick="addTask('pre')" style="background:var(--purple); color:white; border:none; padding:5px 10px; border-radius:5px;">+</button>
+            <div style="display:flex; gap:5px; margin-bottom:10px;">
+                <input type="text" id="in-pre" placeholder="Tarea..." style="flex:1; border-radius:8px; border:1px solid #ddd; padding:5px;">
+                <button onclick="addTask('pre')" class="btn-action" style="background:var(--purple);">+</button>
+            </div>
             <div id="list-pre"></div>
         </section>
 
         <section>
             <h2 contenteditable="true">✨ PERSONALES</h2>
-            <input type="text" id="in-pers" placeholder="Nueva tarea..." style="width:70%; padding:5px; border-radius:5px; border:1px solid #ddd;">
-            <button onclick="addTask('pers')" style="background:var(--purple); color:white; border:none; padding:5px 10px; border-radius:5px;">+</button>
+            <div style="display:flex; gap:5px; margin-bottom:10px;">
+                <input type="text" id="in-pers" placeholder="Tarea..." style="flex:1; border-radius:8px; border:1px solid #ddd; padding:5px;">
+                <button onclick="addTask('pers')" class="btn-action" style="background:var(--purple);">+</button>
+            </div>
             <div id="list-pers"></div>
         </section>
 
         <section style="grid-column: span 2;">
             <h2 contenteditable="true">📅 FECHAS IMPORTANTES</h2>
             <table id="table-fechas">
-                <thead><tr><th>Evento</th><th>Fecha (AAAA-MM-DD)</th><th>Faltan</th></tr></thead>
+                <thead><tr><th>Evento</th><th>Fecha (AAAA-MM-DD)</th><th>Días</th><th>Acción</th></tr></thead>
                 <tbody id="fechas-body" contenteditable="true">
-                    <tr><td>Examen UdeA</td><td>2026-05-20</td><td>-</td></tr>
+                    <tr><td>Examen Admisión</td><td>2026-05-20</td><td>-</td><td contenteditable="false"><button onclick="this.parentElement.parentElement.remove()" style="border:none; background:none; color:red; cursor:pointer;">X</button></td></tr>
                 </tbody>
             </table>
-            <button class="btn-add-row" onclick="addRow('fechas-body', 3)">➕ Agregar Evento</button>
-            <button onclick="calcularFechas()" style="margin-top:5px; width:100%; border-radius:10px; cursor:pointer;">🔄 Calcular Días</button>
-        </section>
-
-        <section>
-            <h2 contenteditable="true">💰 CONTROL GASTOS</h2>
-            <table>
-                <thead><tr><th>Concepto</th><th>Precio</th></tr></thead>
-                <tbody id="gastos-body" contenteditable="true">
-                    <tr><td>Pin UdeA</td><td>$74.000</td></tr>
-                </tbody>
-            </table>
-            <button class="btn-add-row" onclick="addRow('gastos-body', 2)">➕ Agregar Gasto</button>
-        </section>
-
-        <section style="grid-column: span 2;">
-            <h2 contenteditable="true">📊 RASTREO PUNTAJES (40 Preg.)</h2>
-            <table>
-                <thead><tr><th>Taller</th><th>Buenas</th><th>Total</th><th>%</th></tr></thead>
-                <tbody id="puntos-body" contenteditable="true">
-                    <tr><td>Lógica 1</td><td>32</td><td>40</td><td>80%</td></tr>
-                </tbody>
-            </table>
-            <button class="btn-add-row" onclick="addRow('puntos-body', 4)">➕ Agregar Resultado</button>
-        </section>
-
-        <section>
-            <h2 contenteditable="true">🌈 MOOD DE HOY</h2>
-            <div class="mood-box" id="mood-tracker">
-                <span class="mood-btn" onclick="setMood(this)">✨</span>
-                <span class="mood-btn" onclick="setMood(this)">📚</span>
-                <span class="mood-btn" onclick="setMood(this)">😴</span>
-                <span class="mood-btn" onclick="setMood(this)">🎯</span>
-                <span class="mood-btn" onclick="setMood(this)">💖</span>
-            </div>
-            <p style="text-align:center; font-size:0.8em; color:#888;">¿Cómo va tu energía hoy?</p>
-        </section>
-    </div>
-
-    <div class="progreso-container">
-        <b>MI PROGRESO HACIA LA META: <span id="prog-num" contenteditable="true">10</span>%</b>
-        <div style="background:#eee; height:15px; border-radius:10px; margin-top:10px; border:2px solid #ddd; overflow:hidden;">
-            <div id="barra" style="background:var(--purple); width:10%; height:100%; transition:1s;"></div>
-        </div>
-    </div>
-
-    <script>
-        const ids = ['title', 'exam-date', 'fechas-body', 'puntos-body', 'gastos-body', 'prog-num'];
-
-        window.onload = () => {
-            ids.forEach(id => {
-                const saved = localStorage.getItem(id);
-                if(saved) {
-                    if(id === 'exam-date') document.getElementById(id).value = saved;
-                    else document.getElementById(id).innerHTML = saved;
-                }
-            });
-            ['cole','pre','pers'].forEach(renderTasks);
-            updateBar(); updateCountdown(); calcularFechas();
-        };
-
-        document.addEventListener('input', (e) => {
-            if(ids.includes(e.target.id)) {
-                localStorage.setItem(e.target.id, e.target.innerHTML || e.target.value);
-                if(e.target.id === 'prog-num') updateBar();
-                if(e.target.id === 'exam-date') updateCountdown();
-            }
-        });
-
-        function addRow(id, cols) {
-            const table = document.getElementById(id);
-            const row = table.insertRow();
-            for(let i=0; i<cols; i++) {
-                row.insertCell(i).innerHTML = "-";
-            }
-            localStorage.setItem(id, table.innerHTML);
-        }
-
-        function setMood(btn) {
-            document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
-
-        function updateBar() {
-            let n = parseInt(document.getElementById('prog-num').innerText) || 0;
-            document.getElementById('barra').style.width = n + '%';
-        }
-
-        function updateCountdown() {
-            const date = document.getElementById('exam-date').value;
-            if(!date) return;
-            const diff = new Date(date) - new Date();
-            document.getElementById('days-count').innerText = Math.max(0, Math.ceil(diff / (1000*60*60*24)));
-        }
-
-        function calcularFechas() {
-            const rows = document.querySelectorAll('#fechas-body tr');
-            rows.forEach(row => {
-                const f = new Date(row.cells[1].innerText.trim());
-                if(!isNaN(f)) {
-                    const d = Math.ceil((f - new Date()) / (1000*60*60*24));
-                    row.cells[2].innerText = d > 0 ? d : "¡Hoy!";
-                }
-            });
-        }
-
-        // TAREAS (Tachar/Borrar)
-        function addTask(cat) {
-            const input = document.getElementById('in-' + cat);
-            if(!input.value) return;
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat) || '[]');
-            tasks.push({ text: input.value, done: false });
-            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
-            input.value = ''; renderTasks(cat);
-        }
-
-        function toggleTask(cat, index) {
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat));
-            tasks[index].done = !tasks[index].done;
-            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
-            renderTasks(cat);
-        }
-
-        function delTask(cat, index) {
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat));
-            tasks.splice(index, 1);
-            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
-            renderTasks(cat);
-        }
-
-        function renderTasks(cat) {
-            const list = document.getElementById('list-' + cat);
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat) || '[]');
-            list.innerHTML = tasks.map((t, i) => `
-                <div style="display:flex; justify-content:space-between; background:#fff5f8; margin:5px 0; padding:8px; border-radius:10px; border-left:4px solid var(--purple);">
-                    <span style="cursor:pointer; ${t.done?'text-decoration:line-through; opacity:0.5':''}" onclick="toggleTask('${cat}', ${i})">${t.text}</span>
-                    <button onclick="delTask('${cat}', ${i})" style="border:none; background:none; color:var(--pink); cursor:pointer; font-weight:bold;">X</button>
-                </div>
-            `).join('');
-        }
-    </script>
-</body>
-</html>
+            <button class="btn-action" onclick="addRow('fechas-body', 4)">➕ Fila Nueva</button>
+            <button class="btn-action" onclick="calcularFechas()" style="background:#7
