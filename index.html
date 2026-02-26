@@ -202,3 +202,71 @@
                 const saved = localStorage.getItem(id);
                 if(saved) {
                     if(id === 'exam-date') document.getElementById(id).value = saved;
+                    else document.getElementById(id).innerHTML = saved;
+                }
+            });
+            renderTodos();
+            updateBar();
+            updateCountdown();
+        };
+
+        document.addEventListener('input', (e) => {
+            if(ids.includes(e.target.id)) {
+                localStorage.setItem(e.target.id, e.target.value || e.target.innerHTML);
+                if(e.target.id === 'progreso-num') updateBar();
+                if(e.target.id === 'exam-date') updateCountdown();
+            }
+        });
+
+        function updateBar() {
+            let n = parseInt(document.getElementById('progreso-num').innerText) || 0;
+            document.getElementById('barra').style.width = Math.min(n, 100) + '%';
+        }
+
+        function updateCountdown() {
+            const date = document.getElementById('exam-date').value;
+            if(!date) return;
+            const diff = new Date(date) - new Date();
+            document.getElementById('days-count').innerText = Math.max(0, Math.ceil(diff / (1000*60*60*24)));
+        }
+
+        // SISTEMA DE TAREAS (TODO)
+        function addTodo() {
+            const input = document.getElementById('todo-input');
+            if(!input.value) return;
+            const tasks = JSON.parse(localStorage.getItem('tasks-v2') || '[]');
+            tasks.push({ text: input.value, completed: false });
+            localStorage.setItem('tasks-v2', JSON.stringify(tasks));
+            input.value = '';
+            renderTodos();
+        }
+
+        function toggleTodo(index) {
+            const tasks = JSON.parse(localStorage.getItem('tasks-v2'));
+            tasks[index].completed = !tasks[index].completed;
+            localStorage.setItem('tasks-v2', JSON.stringify(tasks));
+            renderTodos();
+        }
+
+        function deleteTodo(index) {
+            const tasks = JSON.parse(localStorage.getItem('tasks-v2'));
+            tasks.splice(index, 1);
+            localStorage.setItem('tasks-v2', JSON.stringify(tasks));
+            renderTodos();
+        }
+
+        function renderTodos() {
+            const list = document.getElementById('todo-list');
+            const tasks = JSON.parse(localStorage.getItem('tasks-v2') || '[]');
+            list.innerHTML = tasks.map((t, i) => `
+                <div class="todo-item">
+                    <span class="todo-text ${t.completed ? 'completed' : ''}" onclick="toggleTodo(${i})">
+                        ${t.text}
+                    </span>
+                    <button class="delete-btn" onclick="deleteTodo(${i})">X</button>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
