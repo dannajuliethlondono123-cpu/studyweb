@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DANNA'S ELITE DASHBOARD 2026</title>
+    <title>DANNA'S BLUE QUEST 2026</title>
     <style>
         :root {
             --purple: #9b6dff;
-            --pink: #ff85a1;
-            --white: rgba(255, 255, 255, 0.92);
+            --blue-sky: #a2d2ff; /* Tu nuevo azul cielo */
+            --dark-purple: #7b4dff;
+            --white: rgba(255, 255, 255, 0.95);
         }
 
         body {
-            /* TU FONDO DE FLORES */
-            background-image: url('https://img.freepik.com/vector-gratis/acuarela-floral-monocromatica-fondo_23-2148302335.jpg?semt=ais_user_personalization&w=740&q=80');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
+            background-color: var(--blue-sky);
             font-family: 'Segoe UI', sans-serif;
             margin: 0; padding: 20px;
             display: flex; flex-direction: column; align-items: center;
@@ -38,7 +35,6 @@
 
         .snoopy { position: absolute; right: 30px; top: 15px; width: 85px; }
 
-        /* SECCIÓN DE ATAJOS */
         .shortcuts {
             display: flex; gap: 15px; justify-content: center; margin-bottom: 25px; flex-wrap: wrap;
         }
@@ -46,9 +42,8 @@
             background: var(--white); border: 4px solid var(--purple);
             padding: 10px 20px; border-radius: 20px; text-decoration: none;
             color: var(--purple); font-weight: bold; transition: 0.3s;
-            display: flex; align-items: center; gap: 8px;
         }
-        .shortcut-btn:hover { transform: translateY(-5px); background: var(--purple); color: white; }
+        .shortcut-btn:hover { transform: scale(1.1); background: var(--purple); color: white; }
 
         .main-grid {
             display: grid;
@@ -65,27 +60,34 @@
 
         h2 { color: var(--purple); border-bottom: 4px dashed #eee; padding-bottom: 10px; font-size: 1.1em; text-align: center; margin-top: 0; outline: none; }
 
-        /* TABLAS */
+        /* TABLAS Y BOTONES */
         table { width: 100%; border-collapse: collapse; font-size: 0.85em; margin-bottom: 10px; }
         th { background: var(--purple); color: white; padding: 8px; }
         td { border-bottom: 1px solid #ddd; padding: 8px; text-align: center; outline: none; }
 
         .btn-action {
-            background: var(--pink); color: white; border: none; padding: 5px 12px;
+            background: var(--purple); /* Ahora en morado */
+            color: white; border: none; padding: 8px 15px;
             border-radius: 12px; cursor: pointer; font-size: 0.8em; margin: 5px 0;
+            font-weight: bold;
         }
+        .btn-action:hover { background: var(--dark-purple); }
 
-        /* TAREAS */
         .task-item {
-            display: flex; justify-content: space-between; background: #fff5f8;
+            display: flex; justify-content: space-between; background: #f0f7ff;
             margin: 5px 0; padding: 10px; border-radius: 12px; border-left: 5px solid var(--purple);
         }
 
-        /* PROGRESO */
+        /* PROGRESO AUTOMÁTICO */
         .progreso-container {
-            margin-top: 30px; background: var(--white); padding: 20px;
+            margin-top: 30px; background: var(--white); padding: 25px;
             border: 8px solid var(--purple); border-radius: 35px;
             width: 90%; max-width: 450px; text-align: center;
+        }
+
+        #barra {
+            background: linear-gradient(90deg, var(--purple), #c0a0ff);
+            width: 0%; height: 100%; transition: 2s ease-in-out;
         }
 
         @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
@@ -97,17 +99,17 @@
         <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Snoopy_Peanuts.png" class="snoopy">
         <h1 id="title" contenteditable="true">Danna's Elite Quest 2026</h1>
         <div style="font-weight: bold;">
-            <span contenteditable="true">DÍAS RESTANTES:</span> <span id="days-count">00</span>
+            <span contenteditable="true">TIEMPO PARA EL EXAMEN:</span> <span id="days-count">00</span> DÍAS
             <br>
             <input type="date" id="exam-date" style="border: 3px solid var(--purple); border-radius: 10px; padding: 5px; margin-top: 10px;">
         </div>
     </div>
 
     <div class="shortcuts">
-        <a href="https://www.youtube.com" target="_blank" class="shortcut-btn">📺 YouTube</a>
-        <a href="https://www.canva.com" target="_blank" class="shortcut-btn">🎨 Canva</a>
-        <a href="https://chatgpt.com" target="_blank" class="shortcut-btn">🤖 ChatGPT</a>
-        <a href="https://www.notion.so" target="_blank" class="shortcut-btn">📝 Notion</a>
+        <a href="https://www.youtube.com" target="_blank" class="shortcut-btn">YouTube</a>
+        <a href="https://www.canva.com" target="_blank" class="shortcut-btn">Canva</a>
+        <a href="https://chatgpt.com" target="_blank" class="shortcut-btn">ChatGPT</a>
+        <a href="https://www.notion.so" target="_blank" class="shortcut-btn">Notion</a>
     </div>
 
     <div class="main-grid">
@@ -115,7 +117,7 @@
             <h2 contenteditable="true">✅ COLEGIO</h2>
             <div style="display:flex; gap:5px; margin-bottom:10px;">
                 <input type="text" id="in-cole" placeholder="Tarea..." style="flex:1; border-radius:8px; border:1px solid #ddd; padding:5px;">
-                <button onclick="addTask('cole')" class="btn-action" style="background:var(--purple);">+</button>
+                <button onclick="addTask('cole')" class="btn-action">+</button>
             </div>
             <div id="list-cole"></div>
         </section>
@@ -124,7 +126,7 @@
             <h2 contenteditable="true">🚀 PRE-U / UdeA</h2>
             <div style="display:flex; gap:5px; margin-bottom:10px;">
                 <input type="text" id="in-pre" placeholder="Tarea..." style="flex:1; border-radius:8px; border:1px solid #ddd; padding:5px;">
-                <button onclick="addTask('pre')" class="btn-action" style="background:var(--purple);">+</button>
+                <button onclick="addTask('pre')" class="btn-action">+</button>
             </div>
             <div id="list-pre"></div>
         </section>
@@ -133,7 +135,7 @@
             <h2 contenteditable="true">✨ PERSONALES</h2>
             <div style="display:flex; gap:5px; margin-bottom:10px;">
                 <input type="text" id="in-pers" placeholder="Tarea..." style="flex:1; border-radius:8px; border:1px solid #ddd; padding:5px;">
-                <button onclick="addTask('pers')" class="btn-action" style="background:var(--purple);">+</button>
+                <button onclick="addTask('pers')" class="btn-action">+</button>
             </div>
             <div id="list-pers"></div>
         </section>
@@ -141,10 +143,169 @@
         <section style="grid-column: span 2;">
             <h2 contenteditable="true">📅 FECHAS IMPORTANTES</h2>
             <table id="table-fechas">
-                <thead><tr><th>Evento</th><th>Fecha (AAAA-MM-DD)</th><th>Días</th><th>Acción</th></tr></thead>
-                <tbody id="fechas-body" contenteditable="true">
-                    <tr><td>Examen Admisión</td><td>2026-05-20</td><td>-</td><td contenteditable="false"><button onclick="this.parentElement.parentElement.remove()" style="border:none; background:none; color:red; cursor:pointer;">X</button></td></tr>
-                </tbody>
+                <thead><tr><th>Evento</th><th>Fecha</th><th>Días</th><th>Borrar</th></tr></thead>
+                <tbody id="fechas-body" contenteditable="true"></tbody>
             </table>
-            <button class="btn-action" onclick="addRow('fechas-body', 4)">➕ Fila Nueva</button>
-            <button class="btn-action" onclick="calcularFechas()" style="background:#7
+            <button class="btn-action" onclick="addRow('fechas-body', 4)">➕ Agregar Evento</button>
+            <button class="btn-action" onclick="calcularFechas()" style="background:#444;">🔄 Actualizar Días</button>
+        </section>
+
+        <section>
+            <h2 contenteditable="true">💰 COSTOS</h2>
+            <table id="table-gastos">
+                <thead><tr><th>Concepto</th><th>Precio</th></tr></thead>
+                <tbody id="gastos-body" contenteditable="true"></tbody>
+            </table>
+            <button class="btn-action" onclick="addRow('gastos-body', 2)">➕ Agregar Gasto</button>
+        </section>
+
+        <section style="grid-column: span 2;">
+            <h2 contenteditable="true">📊 PUNTAJES (40 Preg.)</h2>
+            <table id="table-puntos">
+                <thead><tr><th>Taller</th><th>Buenas</th><th>Total</th><th>%</th></tr></thead>
+                <tbody id="puntos-body" contenteditable="true"></tbody>
+            </table>
+            <button class="btn-action" onclick="addRow('puntos-body', 4)">➕ Agregar</button>
+        </section>
+
+        <section>
+            <h2 contenteditable="true">🌈 MOOD TRACKER</h2>
+            <div style="display:flex; justify-content:space-around; font-size:1.8em; padding:10px;">
+                <span onclick="this.style.filter='none'" style="cursor:pointer; filter:grayscale(1);">✨</span>
+                <span onclick="this.style.filter='none'" style="cursor:pointer; filter:grayscale(1);">📚</span>
+                <span onclick="this.style.filter='none'" style="cursor:pointer; filter:grayscale(1);">💖</span>
+                <span onclick="this.style.filter='none'" style="cursor:pointer; filter:grayscale(1);">🎯</span>
+            </div>
+        </section>
+    </div>
+
+    <div class="progreso-container">
+        <b>PROGRESO AUTOMÁTICO HACIA EXAMEN: <span id="prog-num">0</span>%</b>
+        <div style="background:#eee; height:20px; border-radius:10px; margin-top:10px; border:2px solid #ddd; overflow:hidden;">
+            <div id="barra"></div>
+        </div>
+        <small id="prog-info" style="display:block; margin-top:5px; color:#666;"></small>
+    </div>
+
+    <script>
+        const ids = ['title', 'exam-date', 'fechas-body', 'puntos-body', 'gastos-body'];
+
+        window.onload = () => {
+            ids.forEach(id => {
+                const saved = localStorage.getItem(id);
+                if(saved) {
+                    if(id === 'exam-date') document.getElementById(id).value = saved;
+                    else document.getElementById(id).innerHTML = saved;
+                }
+            });
+            ['cole','pre','pers'].forEach(renderTasks);
+            autoProgreso();
+            calcularFechas();
+        };
+
+        document.addEventListener('input', (e) => {
+            if(ids.includes(e.target.id)) {
+                localStorage.setItem(e.target.id, e.target.innerHTML || e.target.value);
+                if(e.target.id === 'exam-date') autoProgreso();
+            }
+        });
+
+        function addRow(id, cols) {
+            const table = document.getElementById(id);
+            const row = table.insertRow();
+            for(let i=0; i<cols; i++) {
+                if(i === cols-1 && (id === 'fechas-body' || id === 'puntos-body')) {
+                    row.insertCell(i).innerHTML = '<button onclick="this.parentElement.parentElement.remove()" style="border:none; background:none; color:red; cursor:pointer; font-weight:bold;">X</button>';
+                } else {
+                    row.insertCell(i).innerHTML = "-";
+                }
+            }
+        }
+
+        // --- LÓGICA DE PROGRESO AUTOMÁTICO ---
+        function autoProgreso() {
+            const dateInput = document.getElementById('exam-date').value;
+            const daysCountSpan = document.getElementById('days-count');
+            const progNum = document.getElementById('prog-num');
+            const barra = document.getElementById('barra');
+            const info = document.getElementById('prog-info');
+
+            if(!dateInput) {
+                progNum.innerText = "0";
+                barra.style.width = "0%";
+                info.innerText = "Selecciona una fecha para activar";
+                return;
+            }
+
+            const hoy = new Date();
+            const examen = new Date(dateInput);
+            const diffTime = examen - hoy;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            daysCountSpan.innerText = Math.max(0, diffDays);
+
+            // Supongamos un ciclo de estudio de 180 días (6 meses) para el cálculo
+            // Entre menos días falten, el porcentaje es mayor.
+            let porcentaje = 0;
+            const cicloMaximo = 180; 
+
+            if (diffDays <= 0) {
+                porcentaje = 100;
+            } else if (diffDays > cicloMaximo) {
+                porcentaje = 5; // Empezando
+            } else {
+                porcentaje = Math.round(((cicloMaximo - diffDays) / cicloMaximo) * 100);
+            }
+
+            progNum.innerText = porcentaje;
+            barra.style.width = porcentaje + "%";
+            info.innerText = `¡Faltan ${diffDays} días! Vas por el ${porcentaje}% del camino.`;
+        }
+
+        function calcularFechas() {
+            const rows = document.querySelectorAll('#fechas-body tr');
+            rows.forEach(row => {
+                const f = new Date(row.cells[1].innerText.trim());
+                if(!isNaN(f)) {
+                    const d = Math.ceil((f - new Date()) / (1000*60*60*24));
+                    row.cells[2].innerText = d > 0 ? d : "¡Llegó!";
+                }
+            });
+        }
+
+        function addTask(cat) {
+            const input = document.getElementById('in-' + cat);
+            if(!input.value) return;
+            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat) || '[]');
+            tasks.push({ text: input.value, done: false });
+            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
+            input.value = ''; renderTasks(cat);
+        }
+
+        function toggleTask(cat, index) {
+            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat));
+            tasks[index].done = !tasks[index].done;
+            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
+            renderTasks(cat);
+        }
+
+        function delTask(cat, index) {
+            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat));
+            tasks.splice(index, 1);
+            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
+            renderTasks(cat);
+        }
+
+        function renderTasks(cat) {
+            const list = document.getElementById('list-' + cat);
+            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat) || '[]');
+            list.innerHTML = tasks.map((t, i) => `
+                <div class="task-item">
+                    <span style="cursor:pointer; ${t.done?'text-decoration:line-through; opacity:0.5':''}" onclick="toggleTask('${cat}', ${i})">${t.text}</span>
+                    <button onclick="delTask('${cat}', ${i})" style="border:none; background:none; color:red; cursor:pointer; font-weight:bold;">X</button>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
