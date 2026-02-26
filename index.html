@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DANNA'S ELITE DASHBOARD 2026</title>
+    <title>DANNA'S PINK QUEST 2026</title>
     <style>
         :root {
-            --bg: #fdfbff;
+            --bg-pink: #ffeef2; /* Rosado tenue bonito */
             --purple: #9b6dff;
-            --pink: #ff85a1;
             --white: #ffffff;
+            --dark-purple: #7b4dff;
         }
 
         body {
-            background-color: #a2d2ff;
+            background-color: var(--bg-pink);
             font-family: 'Segoe UI', sans-serif;
             margin: 0; padding: 20px;
             display: flex; flex-direction: column; align-items: center;
@@ -34,12 +34,14 @@
             font-size: 2.8em; margin: 10px 0; outline: none;
         }
 
-        .snoopy { position: absolute; right: 30px; top: 15px; width: 90px; }
+        .edit-label { outline: none; display: inline-block; }
+
+        .snoopy { position: absolute; right: 30px; top: 15px; width: 85px; }
 
         /* GRID PRINCIPAL */
         .main-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 Columnas perfectas */
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px; width: 95%; max-width: 1200px;
         }
 
@@ -56,29 +58,43 @@
             margin-top: 0; outline: none;
         }
 
-        /* SISTEMA DE TAREAS */
+        /* TAREAS */
         .task-input-row { display: flex; gap: 5px; margin-bottom: 10px; }
         .task-input-row input { flex: 1; padding: 8px; border: 2px solid #ddd; border-radius: 10px; }
-        .btn-add { background: var(--purple); color: white; border: none; padding: 8px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        .btn-add { background: var(--purple); color: white; border: none; padding: 8px; border-radius: 10px; cursor: pointer; }
         
         .task-list { list-style: none; padding: 0; }
         .task-item { 
-            background: #f9f4ff; margin-bottom: 6px; padding: 8px 12px; 
+            background: #fff5f8; margin-bottom: 6px; padding: 8px; 
             border-radius: 12px; display: flex; justify-content: space-between; 
             align-items: center; border-left: 5px solid var(--purple);
         }
         .task-text { cursor: pointer; flex: 1; font-size: 0.9em; }
         .task-text.done { text-decoration: line-through; opacity: 0.5; }
-        .del-btn { color: white; background: var(--pink); border: none; border-radius: 5px; padding: 2px 7px; cursor: pointer; font-size: 0.8em; }
+        .del-btn { color: white; background: #ff85a1; border: none; border-radius: 5px; padding: 2px 7px; cursor: pointer; }
 
-        /* TABLA DE PUNTAJES */
+        /* TABLAS */
         table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
         th { background: var(--purple); color: white; padding: 5px; }
         td { border: 1px solid #eee; padding: 5px; text-align: center; }
 
-        .editable { outline: none; min-height: 80px; }
+        /* SUDOKU MINI */
+        .sudoku-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 5px; width: 150px; margin: 10px auto;
+        }
+        .sudoku-grid input {
+            width: 40px; height: 40px; text-align: center; border: 2px solid var(--purple);
+            border-radius: 8px; font-weight: bold;
+        }
 
-        /* RESPONSIVE */
+        /* BARRA PROGRESO */
+        .progreso-container {
+            margin-top: 20px; background: white; padding: 20px;
+            border: 8px solid var(--purple); border-radius: 30px;
+            width: 90%; max-width: 400px; text-align: center;
+        }
+
         @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -87,15 +103,17 @@
     <div class="header">
         <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Snoopy_Peanuts.png" class="snoopy">
         <h1 id="title" contenteditable="true">Danna's Elite Quest 2026</h1>
-        <div style="font-weight: bold;">
-            📅 DÍAS PARA EL EXAMEN: <span id="days-count">00</span> | 
-            <input type="date" id="exam-date" style="border: 2px solid var(--purple); border-radius: 8px;">
+        <div style="font-weight: bold; font-size: 1.2em;">
+            <span class="edit-label" id="label-examen" contenteditable="true">DÍAS PARA EL EXAMEN:</span> 
+            <span id="days-count">00</span>
+            <br>
+            <input type="date" id="exam-date" style="border: 2px solid var(--purple); border-radius: 8px; margin-top: 5px;">
         </div>
     </div>
 
     <div class="main-grid">
         <section>
-            <h2 id="t1" contenteditable="true">✅ TAREAS COLEGIO</h2>
+            <h2 contenteditable="true">✅ TAREAS COLEGIO</h2>
             <div class="task-input-row">
                 <input type="text" id="in-cole" placeholder="Nueva tarea cole...">
                 <button class="btn-add" onclick="addTask('cole')">+</button>
@@ -104,7 +122,7 @@
         </section>
 
         <section>
-            <h2 id="t2" contenteditable="true">🚀 TAREAS PRE-U / UdeA</h2>
+            <h2 contenteditable="true">🚀 TAREAS PRE-U / UdeA</h2>
             <div class="task-input-row">
                 <input type="text" id="in-pre" placeholder="Nueva tarea Pre-U...">
                 <button class="btn-add" onclick="addTask('pre')">+</button>
@@ -113,7 +131,7 @@
         </section>
 
         <section>
-            <h2 id="t3" contenteditable="true">✨ TAREAS PERSONALES</h2>
+            <h2 contenteditable="true">✨ TAREAS PERSONALES</h2>
             <div class="task-input-row">
                 <input type="text" id="in-pers" placeholder="Otra tarea...">
                 <button class="btn-add" onclick="addTask('pers')">+</button>
@@ -121,107 +139,11 @@
             <div id="list-pers" class="task-list"></div>
         </section>
 
-        <section>
-            <h2 id="t4" contenteditable="true">📚 APUNTES IMPORTANTES</h2>
-            <div class="editable" id="apuntes" contenteditable="true">• Recordar fórmulas de física...</div>
-        </section>
-
-        <section>
-            <h2 id="t5" contenteditable="true">💰 CONTROL DE COSTOS</h2>
-            <div class="editable" id="costos" contenteditable="true">• Pin UdeA: $74.000<br>• Pin ICFES: $</div>
-        </section>
-
-        <section>
-            <h2 id="t6" contenteditable="true">📊 RASTREO DE PUNTAJES</h2>
-            <table>
+        <section style="grid-column: span 2;">
+            <h2 contenteditable="true">📅 FECHAS IMPORTANTES</h2>
+            <table id="table-fechas">
                 <thead>
-                    <tr><th>Taller/Simu</th><th>Buenas</th><th>Total</th></tr>
+                    <tr><th>Evento</th><th>Fecha</th><th>Faltan (Días)</th></tr>
                 </thead>
-                <tbody id="tabla-puntajes" contenteditable="true">
-                    <tr><td>Razonamiento</td><td>32</td><td>40</td></tr>
-                    <tr><td>Lectura</td><td>25</td><td>40</td></tr>
-                </tbody>
-            </table>
-        </section>
-    </div>
-
-    <div style="margin-top:20px; background:white; padding:15px; border:6px solid var(--purple); border-radius:20px; width:300px; text-align:center;">
-        <b>Progreso General: <span id="prog-num" contenteditable="true">10</span>%</b>
-        <div style="background:#eee; height:12px; border-radius:10px; margin-top:5px; border:1px solid #ddd; overflow:hidden;">
-            <div id="barra" style="background:var(--purple); width:10%; height:100%; transition:0.5s;"></div>
-        </div>
-    </div>
-
-    <script>
-        const ids = ['title', 'exam-date', 'apuntes', 'costos', 'tabla-puntajes', 'prog-num', 't1','t2','t3','t4','t5','t6'];
-
-        window.onload = () => {
-            ids.forEach(id => {
-                const saved = localStorage.getItem(id);
-                if(saved) {
-                    if(id === 'exam-date') document.getElementById(id).value = saved;
-                    else document.getElementById(id).innerHTML = saved;
-                }
-            });
-            renderTasks('cole'); renderTasks('pre'); renderTasks('pers');
-            updateBar(); updateCountdown();
-        };
-
-        document.addEventListener('input', (e) => {
-            if(ids.includes(e.target.id)) {
-                localStorage.setItem(e.target.id, e.target.value || e.target.innerHTML);
-                if(e.target.id === 'prog-num') updateBar();
-                if(e.target.id === 'exam-date') updateCountdown();
-            }
-        });
-
-        function updateBar() {
-            let n = parseInt(document.getElementById('prog-num').innerText) || 0;
-            document.getElementById('barra').style.width = n + '%';
-        }
-
-        function updateCountdown() {
-            const date = document.getElementById('exam-date').value;
-            if(!date) return;
-            const diff = new Date(date) - new Date();
-            document.getElementById('days-count').innerText = Math.max(0, Math.ceil(diff / (1000*60*60*24)));
-        }
-
-        // GESTIÓN DE TAREAS POR CATEGORÍA
-        function addTask(cat) {
-            const input = document.getElementById('in-' + cat);
-            if(!input.value) return;
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat) || '[]');
-            tasks.push({ text: input.value, done: false });
-            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
-            input.value = '';
-            renderTasks(cat);
-        }
-
-        function toggleTask(cat, index) {
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat));
-            tasks[index].done = !tasks[index].done;
-            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
-            renderTasks(cat);
-        }
-
-        function delTask(cat, index) {
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat));
-            tasks.splice(index, 1);
-            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
-            renderTasks(cat);
-        }
-
-        function renderTasks(cat) {
-            const list = document.getElementById('list-' + cat);
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat) || '[]');
-            list.innerHTML = tasks.map((t, i) => `
-                <div class="task-item">
-                    <span class="task-text ${t.done ? 'done' : ''}" onclick="toggleTask('${cat}', ${i})">${t.text}</span>
-                    <button class="del-btn" onclick="delTask('${cat}', ${i})">X</button>
-                </div>
-            `).join('');
-        }
-    </script>
-</body>
-</html>
+                <tbody id="fechas-body" contenteditable="true">
+                    <tr><td>Entrega de Taller</td><td>2026-03-15</td><td>
