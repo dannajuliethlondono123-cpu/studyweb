@@ -3,200 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DANNA'S ELITE QUEST 2026</title>
+    <title>DANNA'S ELITE DASHBOARD 2026</title>
     <style>
         :root {
-            --bg: #f0f7ff;
+            --bg: #fdfbff;
             --purple: #9b6dff;
             --pink: #ff85a1;
-            --dark: #444;
             --white: #ffffff;
         }
 
         body {
-            background-color: var(--bg);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            background-color: #a2d2ff;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0; padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
         }
 
         /* HEADER */
         .header {
             background: var(--white);
-            border: 8px solid var(--purple); /* Borde más grueso */
+            border: 8px solid var(--purple);
             border-radius: 40px;
-            padding: 30px;
-            width: 90%;
-            max-width: 850px;
-            position: relative;
-            text-align: center;
-            box-shadow: 0 12px 0 var(--purple);
-            margin-bottom: 30px;
+            padding: 30px; width: 95%; max-width: 1100px;
+            position: relative; text-align: center;
+            box-shadow: 0 12px 0 var(--purple); margin-bottom: 30px;
         }
 
         #title {
-            font-family: 'Georgia', serif;
-            font-style: italic; /* Letra cursiva */
-            font-size: 2.5em;
-            margin: 10px 0;
-            outline: none;
+            font-family: 'Georgia', serif; font-style: italic;
+            font-size: 2.8em; margin: 10px 0; outline: none;
         }
 
-        .snoopy { position: absolute; right: 25px; top: 15px; width: 85px; }
+        .snoopy { position: absolute; right: 30px; top: 15px; width: 90px; }
 
-        /* WIDGETS SUPERIORES */
-        .top-widgets {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 90%;
-            max-width: 850px;
-            margin-bottom: 30px;
-        }
-
-        .widget {
-            background: white;
-            border: 6px solid var(--purple);
-            border-radius: 25px;
-            padding: 15px;
-            flex: 1;
-            min-width: 250px;
-            text-align: center;
-        }
-
-        /* LISTA DE TAREAS MEJORADA */
-        .todo-item {
-            background: #f9f0ff;
-            margin: 8px 0;
-            padding: 12px;
-            border-radius: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 8px solid var(--purple);
-            font-weight: 500;
-        }
-
-        .todo-text { cursor: pointer; flex: 1; }
-        .todo-text.completed { text-decoration: line-through; opacity: 0.5; }
-        
-        .delete-btn {
-            color: white;
-            background: var(--pink);
-            border: none;
-            border-radius: 8px;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-
-        /* GRID DEL DASHBOARD */
-        .grid {
+        /* GRID PRINCIPAL */
+        .main-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 25px;
-            width: 95%;
-            max-width: 1200px;
+            grid-template-columns: repeat(3, 1fr); /* 3 Columnas perfectas */
+            gap: 20px; width: 95%; max-width: 1200px;
         }
 
         section {
             background: var(--white);
-            border: 6px solid var(--purple); /* Bordes gruesos */
-            border-radius: 30px;
-            padding: 20px;
-            box-shadow: 8px 8px 0 rgba(155, 109, 255, 0.15);
+            border: 7px solid var(--purple);
+            border-radius: 30px; padding: 20px;
+            box-shadow: 8px 8px 0 rgba(155, 109, 255, 0.1);
         }
 
-        h2 { color: var(--purple); border-bottom: 3px dashed #eee; padding-bottom: 10px; font-size: 1.2em; }
-        .editable { outline: none; min-height: 120px; line-height: 1.6; }
-
-        /* BOTONES */
-        .btn-add {
-            background: var(--purple);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: bold;
+        h2 { 
+            color: var(--purple); border-bottom: 4px dashed #eee; 
+            padding-bottom: 10px; font-size: 1.1em; text-align: center;
+            margin-top: 0; outline: none;
         }
+
+        /* SISTEMA DE TAREAS */
+        .task-input-row { display: flex; gap: 5px; margin-bottom: 10px; }
+        .task-input-row input { flex: 1; padding: 8px; border: 2px solid #ddd; border-radius: 10px; }
+        .btn-add { background: var(--purple); color: white; border: none; padding: 8px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        
+        .task-list { list-style: none; padding: 0; }
+        .task-item { 
+            background: #f9f4ff; margin-bottom: 6px; padding: 8px 12px; 
+            border-radius: 12px; display: flex; justify-content: space-between; 
+            align-items: center; border-left: 5px solid var(--purple);
+        }
+        .task-text { cursor: pointer; flex: 1; font-size: 0.9em; }
+        .task-text.done { text-decoration: line-through; opacity: 0.5; }
+        .del-btn { color: white; background: var(--pink); border: none; border-radius: 5px; padding: 2px 7px; cursor: pointer; font-size: 0.8em; }
+
+        /* TABLA DE PUNTAJES */
+        table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
+        th { background: var(--purple); color: white; padding: 5px; }
+        td { border: 1px solid #eee; padding: 5px; text-align: center; }
+
+        .editable { outline: none; min-height: 80px; }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <div class="header">
         <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Snoopy_Peanuts.png" class="snoopy">
-        <h1 id="title" contenteditable="true">Danna's Quest 2026</h1>
-        <div style="font-weight: bold; color: var(--purple);">
-            FALTAN <span id="days-count">00</span> DÍAS | Examen: 
-            <input type="date" id="exam-date" style="border: 2px solid var(--purple); border-radius: 8px; font-family: inherit;">
+        <h1 id="title" contenteditable="true">Danna's Elite Quest 2026</h1>
+        <div style="font-weight: bold;">
+            📅 DÍAS PARA EL EXAMEN: <span id="days-count">00</span> | 
+            <input type="date" id="exam-date" style="border: 2px solid var(--purple); border-radius: 8px;">
         </div>
     </div>
 
-    <div class="top-widgets">
-        <div class="widget">
-            <div id="frase" contenteditable="true" style="font-style: italic;">"Haz que hoy cuente ✨"</div>
-        </div>
-        <div class="widget">
-            <b>Progreso General: <span id="progreso-num" contenteditable="true">10</span>%</b>
-            <div style="background:#eee; height:15px; border-radius:10px; margin-top:8px; border:2px solid #ddd; overflow:hidden;">
-                <div id="barra" style="background:var(--purple); width:10%; height:100%; transition:0.5s;"></div>
+    <div class="main-grid">
+        <section>
+            <h2 id="t1" contenteditable="true">✅ TAREAS COLEGIO</h2>
+            <div class="task-input-row">
+                <input type="text" id="in-cole" placeholder="Nueva tarea cole...">
+                <button class="btn-add" onclick="addTask('cole')">+</button>
             </div>
-        </div>
+            <div id="list-cole" class="task-list"></div>
+        </section>
+
+        <section>
+            <h2 id="t2" contenteditable="true">🚀 TAREAS PRE-U / UdeA</h2>
+            <div class="task-input-row">
+                <input type="text" id="in-pre" placeholder="Nueva tarea Pre-U...">
+                <button class="btn-add" onclick="addTask('pre')">+</button>
+            </div>
+            <div id="list-pre" class="task-list"></div>
+        </section>
+
+        <section>
+            <h2 id="t3" contenteditable="true">✨ TAREAS PERSONALES</h2>
+            <div class="task-input-row">
+                <input type="text" id="in-pers" placeholder="Otra tarea...">
+                <button class="btn-add" onclick="addTask('pers')">+</button>
+            </div>
+            <div id="list-pers" class="task-list"></div>
+        </section>
+
+        <section>
+            <h2 id="t4" contenteditable="true">📚 APUNTES IMPORTANTES</h2>
+            <div class="editable" id="apuntes" contenteditable="true">• Recordar fórmulas de física...</div>
+        </section>
+
+        <section>
+            <h2 id="t5" contenteditable="true">💰 CONTROL DE COSTOS</h2>
+            <div class="editable" id="costos" contenteditable="true">• Pin UdeA: $74.000<br>• Pin ICFES: $</div>
+        </section>
+
+        <section>
+            <h2 id="t6" contenteditable="true">📊 RASTREO DE PUNTAJES</h2>
+            <table>
+                <thead>
+                    <tr><th>Taller/Simu</th><th>Buenas</th><th>Total</th></tr>
+                </thead>
+                <tbody id="tabla-puntajes" contenteditable="true">
+                    <tr><td>Razonamiento</td><td>32</td><td>40</td></tr>
+                    <tr><td>Lectura</td><td>25</td><td>40</td></tr>
+                </tbody>
+            </table>
+        </section>
     </div>
 
-    <div class="grid">
-        <section>
-            <h2 contenteditable="true">✅ TAREAS (Tachar/Borrar)</h2>
-            <div style="display:flex; gap:8px; margin-bottom:15px;">
-                <input type="text" id="todo-input" placeholder="Nueva tarea..." style="flex:1; padding:10px; border:2px solid #ddd; border-radius:12px;">
-                <button class="btn-add" onclick="addTodo()">Añadir</button>
-            </div>
-            <div id="todo-list"></div>
-        </section>
-
-        <section>
-            <h2 contenteditable="true">💰 CONTROL DE COSTOS</h2>
-            <div class="editable" id="costos" contenteditable="true">
-                • Pin UdeA: $74.000 <br>
-                • Pin ICFES: $ <br>
-                • Otros: $
-            </div>
-        </section>
-
-        <section>
-            <h2 contenteditable="true">📝 APUNTES: ICFES</h2>
-            <div class="editable" id="apuntes-icfes" contenteditable="true">Escribe tus temas clave aquí...</div>
-        </section>
-
-        <section>
-            <h2 contenteditable="true">🎓 APUNTES: UdeA / ADMISIÓN</h2>
-            <div class="editable" id="apuntes-udea" contenteditable="true">Lógica y competencia lectora...</div>
+    <div style="margin-top:20px; background:white; padding:15px; border:6px solid var(--purple); border-radius:20px; width:300px; text-align:center;">
+        <b>Progreso General: <span id="prog-num" contenteditable="true">10</span>%</b>
+        <div style="background:#eee; height:12px; border-radius:10px; margin-top:5px; border:1px solid #ddd; overflow:hidden;">
+            <div id="barra" style="background:var(--purple); width:10%; height:100%; transition:0.5s;"></div>
         </div>
-
-        <section>
-            <h2 contenteditable="true">🏫 APUNTES: COLEGIO</h2>
-            <div class="editable" id="apuntes-cole" contenteditable="true">Pendientes de materias del cole...</div>
-        </section>
-
-        <section>
-            <h2 contenteditable="true">📊 PUNTAJES SIMULACROS</h2>
-            <div class="editable" id="simulacros" contenteditable="true">
-                <b>Meta: 350+</b><br>
-                • Simulacro 1: <br>
-                • Simulacro 2: 
-            </div>
-        </section>
     </div>
 
     <script>
-        const ids = ['title', 'frase', 'progreso-num', 'exam-date', 'costos', 'apuntes-icfes', 'apuntes-udea', 'apuntes-cole', 'simulacros'];
-        
+        const ids = ['title', 'exam-date', 'apuntes', 'costos', 'tabla-puntajes', 'prog-num', 't1','t2','t3','t4','t5','t6'];
+
         window.onload = () => {
             ids.forEach(id => {
                 const saved = localStorage.getItem(id);
@@ -205,22 +163,21 @@
                     else document.getElementById(id).innerHTML = saved;
                 }
             });
-            renderTodos();
-            updateBar();
-            updateCountdown();
+            renderTasks('cole'); renderTasks('pre'); renderTasks('pers');
+            updateBar(); updateCountdown();
         };
 
         document.addEventListener('input', (e) => {
             if(ids.includes(e.target.id)) {
                 localStorage.setItem(e.target.id, e.target.value || e.target.innerHTML);
-                if(e.target.id === 'progreso-num') updateBar();
+                if(e.target.id === 'prog-num') updateBar();
                 if(e.target.id === 'exam-date') updateCountdown();
             }
         });
 
         function updateBar() {
-            let n = parseInt(document.getElementById('progreso-num').innerText) || 0;
-            document.getElementById('barra').style.width = Math.min(n, 100) + '%';
+            let n = parseInt(document.getElementById('prog-num').innerText) || 0;
+            document.getElementById('barra').style.width = n + '%';
         }
 
         function updateCountdown() {
@@ -230,40 +187,38 @@
             document.getElementById('days-count').innerText = Math.max(0, Math.ceil(diff / (1000*60*60*24)));
         }
 
-        // SISTEMA DE TAREAS (TODO)
-        function addTodo() {
-            const input = document.getElementById('todo-input');
+        // GESTIÓN DE TAREAS POR CATEGORÍA
+        function addTask(cat) {
+            const input = document.getElementById('in-' + cat);
             if(!input.value) return;
-            const tasks = JSON.parse(localStorage.getItem('tasks-v2') || '[]');
-            tasks.push({ text: input.value, completed: false });
-            localStorage.setItem('tasks-v2', JSON.stringify(tasks));
+            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat) || '[]');
+            tasks.push({ text: input.value, done: false });
+            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
             input.value = '';
-            renderTodos();
+            renderTasks(cat);
         }
 
-        function toggleTodo(index) {
-            const tasks = JSON.parse(localStorage.getItem('tasks-v2'));
-            tasks[index].completed = !tasks[index].completed;
-            localStorage.setItem('tasks-v2', JSON.stringify(tasks));
-            renderTodos();
+        function toggleTask(cat, index) {
+            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat));
+            tasks[index].done = !tasks[index].done;
+            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
+            renderTasks(cat);
         }
 
-        function deleteTodo(index) {
-            const tasks = JSON.parse(localStorage.getItem('tasks-v2'));
+        function delTask(cat, index) {
+            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat));
             tasks.splice(index, 1);
-            localStorage.setItem('tasks-v2', JSON.stringify(tasks));
-            renderTodos();
+            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
+            renderTasks(cat);
         }
 
-        function renderTodos() {
-            const list = document.getElementById('todo-list');
-            const tasks = JSON.parse(localStorage.getItem('tasks-v2') || '[]');
+        function renderTasks(cat) {
+            const list = document.getElementById('list-' + cat);
+            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat) || '[]');
             list.innerHTML = tasks.map((t, i) => `
-                <div class="todo-item">
-                    <span class="todo-text ${t.completed ? 'completed' : ''}" onclick="toggleTodo(${i})">
-                        ${t.text}
-                    </span>
-                    <button class="delete-btn" onclick="deleteTodo(${i})">X</button>
+                <div class="task-item">
+                    <span class="task-text ${t.done ? 'done' : ''}" onclick="toggleTask('${cat}', ${i})">${t.text}</span>
+                    <button class="del-btn" onclick="delTask('${cat}', ${i})">X</button>
                 </div>
             `).join('');
         }
