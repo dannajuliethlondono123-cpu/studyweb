@@ -3,323 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DANNA'S ELITE DASHBOARD 2026</title>
+    <title>DANNA'S QUEST - AESTHETIC EDITION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&family=Montserrat:wght@300;400&family=Alex+Brush&display=swap" rel="stylesheet">
     <style>
         :root {
-            --purple: #9b6dff;
-            --blue-sky: #a2d2ff;
-            --dark-purple: #7b4dff;
-            --white: rgba(255, 255, 255, 0.95);
+            --bg-color: #fdfcfb;
+            --accent-red: #8b1d2f; /* El tono vino del video */
+            --shadow: 0 10px 25px rgba(0,0,0,0.08);
         }
 
         body {
-            background-color: var(--blue-sky);
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0; padding: 20px;
-            display: flex; flex-direction: column; align-items: center;
+            background-color: var(--bg-color);
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 100px;
+            overflow-x: hidden;
         }
 
-        .header {
-            background: var(--white);
-            border: 8px solid var(--purple);
-            border-radius: 40px;
-            padding: 30px; width: 95%; max-width: 1100px;
-            position: relative; text-align: center;
-            box-shadow: 0 12px 0 var(--purple); margin-bottom: 30px;
-        }
-
-        #title {
-            font-family: 'Georgia', serif; font-style: italic;
-            font-size: 2.8em; margin: 10px 0; outline: none; color: #333;
-        }
-
-        .snoopy { position: absolute; right: 30px; top: 15px; width: 85px; }
-
-        /* ATAJOS MINIMALISTAS */
-        .shortcuts {
-            display: flex; gap: 10px; justify-content: center; margin-bottom: 25px; flex-wrap: wrap;
-            width: 95%; max-width: 1100px;
-        }
-        .shortcut-btn {
-            background: var(--white); border: 4px solid var(--purple);
-            padding: 10px 15px; border-radius: 20px; text-decoration: none;
-            color: var(--purple); font-weight: bold; transition: 0.3s;
-            font-size: 0.85em; display: flex; align-items: center; gap: 6px;
-        }
-        .shortcut-btn:hover { transform: translateY(-3px); background: var(--purple); color: white; box-shadow: 0 5px 15px rgba(155, 109, 255, 0.4); }
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px; width: 95%; max-width: 1200px;
-        }
-
-        section {
-            background: var(--white);
-            border: 7px solid var(--purple);
-            border-radius: 30px; padding: 20px;
-            box-shadow: 8px 8px 0 rgba(155, 109, 255, 0.15);
-        }
-
-        h2 { color: var(--purple); border-bottom: 4px dashed #eee; padding-bottom: 10px; font-size: 1.1em; text-align: center; margin-top: 0; outline: none; }
-
-        table { width: 100%; border-collapse: collapse; font-size: 0.85em; margin-bottom: 10px; }
-        th { background: var(--purple); color: white; padding: 8px; }
-        td { border-bottom: 1px solid #ddd; padding: 8px; text-align: center; outline: none; }
-
-        .btn-action {
-            background: var(--purple);
-            color: white; border: none; padding: 8px 15px;
-            border-radius: 12px; cursor: pointer; font-size: 0.8em; margin: 5px 0;
-            font-weight: bold;
-        }
-
-        .task-item {
-            display: flex; justify-content: space-between; background: #f0f7ff;
-            margin: 5px 0; padding: 10px; border-radius: 12px; border-left: 5px solid var(--purple);
-        }
-
-        /* DISEÑO DE VERSÍCULO */
-        .verse-container {
+        /* HEADER ESTILO VIDEO */
+        .top-nav {
+            width: 100%;
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
             text-align: center;
-            padding: 15px;
-            color: #444;
+            letter-spacing: 3px;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+
+        .main-title {
+            font-family: 'Alex Brush', cursive;
+            font-size: 80px;
+            color: var(--accent-red);
+            margin: 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .snoopy-film {
+            position: absolute;
+            right: 15%;
+            top: 40px;
+            width: 100px;
+            transform: rotate(15deg);
+            filter: grayscale(0.2) sepia(0.2);
+            border: 5px solid white;
+            box-shadow: var(--shadow);
+        }
+
+        /* CONTENEDOR MIX (FECHA Y FRASE) */
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .date-cursive {
+            font-family: 'Playfair Display', serif;
             font-style: italic;
-            line-height: 1.5;
+            font-size: 24px;
+            color: #555;
         }
-        .verse-ref {
-            display: block;
+
+        .quote-box {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
             margin-top: 10px;
-            font-weight: bold;
-            color: var(--purple);
-            font-style: normal;
+            color: var(--accent-red);
+            outline: none;
         }
 
-        .progreso-container {
-            margin-top: 30px; background: var(--white); padding: 25px;
-            border: 8px solid var(--purple); border-radius: 35px;
-            width: 90%; max-width: 450px; text-align: center;
+        /* BARRA DE PROGRESO MINIMALISTA */
+        .progress-wrapper {
+            width: 300px;
+            margin: 0 auto 50px;
+            text-align: center;
         }
 
-        #barra {
-            background: linear-gradient(90deg, var(--purple), #c0a0ff);
-            width: 0%; height: 100%; transition: 2s ease-in-out;
+        .progress-bar-container {
+            height: 2px;
+            background: #eee;
+            width: 100%;
+            margin-top: 10px;
+            position: relative;
         }
 
-        @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-red);
+            width: 15%;
+            transition: 1s ease;
+        }
+
+        /* GRID TIPO COLLAGE */
+        .collage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            width: 90%;
+            max-width: 1100px;
+            padding: 20px;
+        }
+
+        .scrapbook-card {
+            background: white;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border-radius: 2px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .scrapbook-card:nth-child(even) { transform: rotate(-1deg); }
+        .scrapbook-card:nth-child(odd) { transform: rotate(1.5deg); }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 22px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: var(--accent-red);
+        }
+
+        /* LISTA TACHABLE */
+        .todo-list { list-style: none; padding: 0; }
+        .todo-item {
+            padding: 10px 0;
+            cursor: pointer;
+            border-bottom: 1px solid #f9f9f9;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .todo-item.done {
+            text-decoration: line-through;
+            color: #ccc;
+        }
+
+        .editable-area { outline: none; min-height: 100px; line-height: 1.8; font-size: 14px; }
+
+        /* JUEGO SNAKE ESCONDIDO */
+        #game-canvas {
+            border: 1px solid #eee;
+            background: #fafafa;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .btn-play {
+            background: none;
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Snoopy_Peanuts.png" class="snoopy">
-        <h1 id="title" contenteditable="true">Danna's Elite Quest 2026</h1>
-        <div style="font-weight: bold;">
-            <span contenteditable="true">TIEMPO PARA EL EXAMEN:</span> <span id="days-count">00</span> DÍAS
-            <br>
-            <input type="date" id="exam-date" style="border: 3px solid var(--purple); border-radius: 10px; padding: 5px; margin-top: 10px;">
+    <nav class="top-nav">PORTFOLIO &nbsp; • &nbsp; ABOUT ME &nbsp; • &nbsp; CONTACT</nav>
+
+    <div class="header-container" style="position: relative; width: 100%;">
+        <h1 class="main-title" id="main-title" contenteditable="true">Danna Stanton!</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Snoopy_Peanuts.png" class="snoopy-film">
+    </div>
+
+    <div class="welcome-section">
+        <div class="date-cursive" id="hoy-fecha" contenteditable="true">February 26, 2026</div>
+        <div class="quote-box" id="frase-dia" contenteditable="true">"Welcome to my study journey!"</div>
+        
+        <div class="progress-wrapper">
+            <small style="letter-spacing: 2px;">GOAL PROGRESS: <span id="prog-val" contenteditable="true">15</span>%</small>
+            <div class="progress-bar-container">
+                <div class="progress-fill" id="barra"></div>
+            </div>
         </div>
     </div>
 
-    <div class="shortcuts">
-        <a href="https://chatgpt.com" target="_blank" class="shortcut-btn"><span>🤖</span> ChatGPT</a>
-        <a href="https://gemini.google.com" target="_blank" class="shortcut-btn"><span>✨</span> Gemini</a>
-        <a href="https://notebooklm.google.com" target="_blank" class="shortcut-btn"><span>📓</span> NotebookLM</a>
-        <a href="https://www.canva.com" target="_blank" class="shortcut-btn"><span>🎨</span> Canva</a>
-        <a href="https://www.youtube.com" target="_blank" class="shortcut-btn"><span>📺</span> YouTube</a>
-        <a href="https://drive.google.com" target="_blank" class="shortcut-btn"><span>📂</span> Drive</a>
-        <a href="https://classroom.google.com" target="_blank" class="shortcut-btn"><span>🏫</span> Classroom</a>
-    </div>
-
-    <div class="main-grid">
-        <section>
-            <h2 contenteditable="true">✅ COLEGIO</h2>
-            <div style="display:flex; gap:5px; margin-bottom:10px;">
-                <input type="text" id="in-cole" placeholder="Tarea..." style="flex:1; border-radius:8px; border:1px solid #ddd; padding:5px;">
-                <button onclick="addTask('cole')" class="btn-action">+</button>
+    <div class="collage-grid">
+        
+        <div class="scrapbook-card">
+            <div class="card-title" contenteditable="true">Weekly To-Do</div>
+            <div style="display:flex; margin-bottom:15px;">
+                <input type="text" id="todo-in" placeholder="Add task..." style="flex:1; border:none; border-bottom:1px solid #eee; outline:none;">
+                <button onclick="addTodo()" style="border:none; background:none; color:var(--accent-red); cursor:pointer;">+</button>
             </div>
-            <div id="list-cole"></div>
-        </section>
-
-        <section>
-            <h2 contenteditable="true">🚀 PRE-U / UdeA</h2>
-            <div style="display:flex; gap:5px; margin-bottom:10px;">
-                <input type="text" id="in-pre" placeholder="Tarea..." style="flex:1; border-radius:8px; border:1px solid #ddd; padding:5px;">
-                <button onclick="addTask('pre')" class="btn-action">+</button>
-            </div>
-            <div id="list-pre"></div>
-        </section>
-
-        <section>
-            <h2 contenteditable="true">✨ PERSONALES</h2>
-            <div style="display:flex; gap:5px; margin-bottom:10px;">
-                <input type="text" id="in-pers" placeholder="Tarea..." style="flex:1; border-radius:8px; border:1px solid #ddd; padding:5px;">
-                <button onclick="addTask('pers')" class="btn-action">+</button>
-            </div>
-            <div id="list-pers"></div>
-        </section>
-
-        <section style="grid-column: span 2;">
-            <h2 contenteditable="true">📅 FECHAS IMPORTANTES</h2>
-            <table id="table-fechas">
-                <thead><tr><th>Evento</th><th>Fecha</th><th>Días</th><th>Borrar</th></tr></thead>
-                <tbody id="fechas-body" contenteditable="true"></tbody>
-            </table>
-            <button class="btn-action" onclick="addRow('fechas-body', 4)">➕ Agregar Evento</button>
-            <button class="btn-action" onclick="calcularFechas()" style="background:#444;">🔄 Actualizar Días</button>
-        </section>
-
-        <section>
-            <h2 contenteditable="true">💰 COSTOS</h2>
-            <table id="table-gastos">
-                <thead><tr><th>Concepto</th><th>Precio</th></tr></thead>
-                <tbody id="gastos-body" contenteditable="true"></tbody>
-            </table>
-            <button class="btn-action" onclick="addRow('gastos-body', 2)">➕ Agregar Gasto</button>
-        </section>
-
-        <section style="grid-column: span 2;">
-            <h2 contenteditable="true">📊 PUNTAJES (40 Preg.)</h2>
-            <table id="table-puntos">
-                <thead><tr><th>Taller</th><th>Buenas</th><th>Total</th><th>%</th></tr></thead>
-                <tbody id="puntos-body" contenteditable="true"></tbody>
-            </table>
-            <button class="btn-action" onclick="addRow('puntos-body', 4)">➕ Agregar</button>
-        </section>
-
-        <section>
-            <h2 contenteditable="true">🙏 INSPIRACIÓN</h2>
-            <div class="verse-container">
-                "Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo en dondequiera que vayas."
-                <span class="verse-ref">Josué 1:9</span>
-            </div>
-        </section>
-    </div>
-
-    <div class="progreso-container">
-        <b>PROGRESO HACIA EL EXAMEN: <span id="prog-num">0</span>%</b>
-        <div style="background:#eee; height:20px; border-radius:10px; margin-top:10px; border:2px solid #ddd; overflow:hidden;">
-            <div id="barra"></div>
+            <ul id="todo-list" class="todo-list"></ul>
         </div>
-        <small id="prog-info" style="display:block; margin-top:5px; color:#666;"></small>
+
+        <div class="scrapbook-card">
+            <div class="card-title" contenteditable="true">Academic Directory</div>
+            <div class="editable-area" id="materias" contenteditable="true">
+                • Graphic Design / UdeA<br>
+                • Painting Gallery / EAFIT<br>
+                • Portfolio Ideation
+            </div>
+        </div>
+
+        <div class="scrapbook-card">
+            <div class="card-title" contenteditable="true">ICFES Tracker</div>
+            <div class="editable-area" id="tracker" contenteditable="true">
+                26/02: 380 Pts - Top: Arts<br>
+                15/02: 340 Pts - Top: Math
+            </div>
+        </div>
+
+        <div class="scrapbook-card" style="text-align: center;">
+            <div class="card-title">Break Time</div>
+            <canvas id="game-canvas" width="200" height="150"></canvas>
+            <button class="btn-play" onclick="startGame()">Start Game</button>
+        </div>
+
     </div>
 
     <script>
-        const ids = ['title', 'exam-date', 'fechas-body', 'puntos-body', 'gastos-body'];
+        const ids = ['main-title', 'frase-dia', 'hoy-fecha', 'prog-val', 'materias', 'tracker'];
 
         window.onload = () => {
             ids.forEach(id => {
                 const saved = localStorage.getItem(id);
-                if(saved) {
-                    if(id === 'exam-date') document.getElementById(id).value = saved;
-                    else document.getElementById(id).innerHTML = saved;
-                }
+                if (saved) document.getElementById(id).innerHTML = saved;
             });
-            ['cole','pre','pers'].forEach(renderTasks);
-            autoProgreso();
-            calcularFechas();
+            renderTodos();
+            updateProgress();
         };
 
         document.addEventListener('input', (e) => {
-            if(ids.includes(e.target.id)) {
-                localStorage.setItem(e.target.id, e.target.innerHTML || e.target.value);
-                if(e.target.id === 'exam-date') autoProgreso();
+            if (ids.includes(e.target.id)) {
+                localStorage.setItem(e.target.id, e.target.innerHTML);
+                if (e.target.id === 'prog-val') updateProgress();
             }
         });
 
-        function addRow(id, cols) {
-            const table = document.getElementById(id);
-            const row = table.insertRow();
-            for(let i=0; i<cols; i++) {
-                if(i === cols-1 && (id === 'fechas-body' || id === 'puntos-body')) {
-                    row.insertCell(i).innerHTML = '<button onclick="this.parentElement.parentElement.remove()" style="border:none; background:none; color:red; cursor:pointer; font-weight:bold;">X</button>';
-                } else {
-                    row.insertCell(i).innerHTML = "-";
-                }
-            }
+        function updateProgress() {
+            let val = parseInt(document.getElementById('prog-val').innerText) || 0;
+            document.getElementById('barra').style.width = val + '%';
         }
 
-        function autoProgreso() {
-            const dateInput = document.getElementById('exam-date').value;
-            const daysCountSpan = document.getElementById('days-count');
-            const progNum = document.getElementById('prog-num');
-            const barra = document.getElementById('barra');
-            const info = document.getElementById('prog-info');
-
-            if(!dateInput) {
-                progNum.innerText = "0";
-                barra.style.width = "0%";
-                info.innerText = "Selecciona fecha para activar";
-                return;
-            }
-
-            const hoy = new Date();
-            const examen = new Date(dateInput);
-            const diffTime = examen - hoy;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            
-            daysCountSpan.innerText = Math.max(0, diffDays);
-
-            let porcentaje = 0;
-            const cicloMaximo = 180; 
-
-            if (diffDays <= 0) {
-                porcentaje = 100;
-            } else if (diffDays > cicloMaximo) {
-                porcentaje = 5;
-            } else {
-                porcentaje = Math.round(((cicloMaximo - diffDays) / cicloMaximo) * 100);
-            }
-
-            progNum.innerText = porcentaje;
-            barra.style.width = porcentaje + "%";
-            info.innerText = `¡Faltan ${diffDays} días! Preparación al ${porcentaje}%`;
-        }
-
-        function calcularFechas() {
-            const rows = document.querySelectorAll('#fechas-body tr');
-            rows.forEach(row => {
-                const f = new Date(row.cells[1].innerText.trim());
-                if(!isNaN(f)) {
-                    const d = Math.ceil((f - new Date()) / (1000*60*60*24));
-                    row.cells[2].innerText = d > 0 ? d : "¡Hoy!";
-                }
-            });
-        }
-
-        function addTask(cat) {
-            const input = document.getElementById('in-' + cat);
+        // TAREAS
+        function addTodo() {
+            const input = document.getElementById('todo-in');
             if(!input.value) return;
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat) || '[]');
+            const tasks = JSON.parse(localStorage.getItem('aesthetic-tasks') || '[]');
             tasks.push({ text: input.value, done: false });
-            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
-            input.value = ''; renderTasks(cat);
+            localStorage.setItem('aesthetic-tasks', JSON.stringify(tasks));
+            input.value = '';
+            renderTodos();
         }
 
-        function toggleTask(cat, index) {
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat));
-            tasks[index].done = !tasks[index].done;
-            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
-            renderTasks(cat);
+        function toggleTodo(i) {
+            const tasks = JSON.parse(localStorage.getItem('aesthetic-tasks'));
+            tasks[i].done = !tasks[i].done;
+            localStorage.setItem('aesthetic-tasks', JSON.stringify(tasks));
+            renderTodos();
         }
 
-        function delTask(cat, index) {
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat));
-            tasks.splice(index, 1);
-            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
-            renderTasks(cat);
-        }
-
-        function renderTasks(cat) {
-            const list = document.getElementById('list-' + cat);
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat) || '[]');
+        function renderTodos() {
+            const list = document.getElementById('todo-list');
+            const tasks = JSON.parse(localStorage.getItem('aesthetic-tasks') || '[]');
             list.innerHTML = tasks.map((t, i) => `
-                <div class="task-item">
-                    <span style="cursor:pointer; ${t.done?'text-decoration:line-through; opacity:0.5':''}" onclick="toggleTask('${cat}', ${i})">${t.text}</span>
-                    <button onclick="delTask('${cat}', ${i})" style="border:none; background:none; color:red; cursor:pointer; font-weight:bold;">X</button>
-                </div>
+                <li class="todo-item ${t.done ? 'done' : ''}" onclick="toggleTodo(${i})">
+                    ${t.text} <span>${t.done ? '✓' : '•'}</span>
+                </li>
             `).join('');
         }
+
+        // JUEGO SNAKE MINI
+        const canvas = document.getElementById("game-canvas");
+        const ctx = canvas.getContext("2d");
+        let snake, food, d, game;
+
+        function startGame() {
+            clearInterval(game);
+            snake = [{x: 5, y: 5}];
+            d = "RIGHT";
+            food = {x: Math.floor(Math.random()*19), y: Math.floor(Math.random()*14)};
+            game = setInterval(draw, 150);
+        }
+
+        function draw() {
+            ctx.fillStyle = "#fafafa"; ctx.fillRect(0,0,200,150);
+            ctx.fillStyle = "#8b1d2f"; snake.forEach(s => ctx.fillRect(s.x*10, s.y*10, 9, 9));
+            ctx.fillStyle = "#333"; ctx.fillRect(food.x*10, food.y*10, 9, 9);
+            let h = {...snake[0]};
+            if(d=="RIGHT") h.x++; if(d=="LEFT") h.x--; if(d=="UP") h.y--; if(d=="DOWN") h.y++;
+            if(h.x==food.x && h.y==food.y) food = {x: Math.floor(Math.random()*19), y: Math.floor(Math.random()*14)};
+            else snake.pop();
+            if(h.x<0 || h.x>19 || h.y<0 || h.y>14) clearInterval(game);
+            else snake.unshift(h);
+        }
+        document.addEventListener("keydown", e => {
+            if(e.key=="ArrowLeft" && d!="RIGHT") d="LEFT";
+            if(e.key=="ArrowUp" && d!="DOWN") d="UP";
+            if(e.key=="ArrowRight" && d!="LEFT") d="RIGHT";
+            if(e.key=="ArrowDown" && d!="UP") d="DOWN";
+        });
     </script>
 </body>
 </html>
