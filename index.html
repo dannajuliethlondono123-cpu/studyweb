@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DANNA'S QUEST 2026 - FINAL EDITION</title>
+    <title>DANNA'S QUEST - FINAL EDITION</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&family=Montserrat:wght@300;400;600&family=Alex+Brush&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #fdfcfb;
             --accent: #8b1d2f;
-            --shadow: 0 10px 30px rgba(0,0,0,0.06);
+            --shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
         body {
@@ -20,10 +20,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-bottom: 100px;
+            padding-bottom: 80px;
         }
 
-        /* BARRA DE APLICACIONES */
+        /* BARRA DE ATAJOS */
         .shortcuts {
             width: 100%;
             padding: 15px 0;
@@ -31,11 +31,10 @@
             border-bottom: 1px solid #eee;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
             gap: 20px;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
         .shortcut-link {
@@ -43,12 +42,12 @@
             color: var(--accent);
             font-size: 10px;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         /* HEADER */
-        .header-section {
+        .header {
             text-align: center;
             margin: 40px 0;
             position: relative;
@@ -56,265 +55,218 @@
 
         .main-title {
             font-family: 'Alex Brush', cursive;
-            font-size: 70px;
+            font-size: 80px;
             color: var(--accent);
             margin: 0;
         }
 
-        .snoopy-img {
+        .snoopy-float {
             position: absolute;
-            right: -70px;
-            top: 0;
-            width: 75px;
+            right: -60px;
+            top: 10px;
+            width: 70px;
             transform: rotate(10deg);
-            border: 4px solid white;
+            border: 3px solid white;
             box-shadow: var(--shadow);
         }
-
-        /* INFO BAR */
-        .info-bar {
-            width: 90%;
-            max-width: 850px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .info-card {
-            background: white;
-            padding: 20px;
-            border-radius: 2px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            border-top: 3px solid var(--accent);
-        }
-
-        .days-box { font-size: 24px; font-family: 'Playfair Display', serif; font-weight: bold; color: var(--accent); }
 
         /* GRID COLLAGE */
-        .collage-container {
+        .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            width: 90%;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+            width: 92%;
+            max-width: 1250px;
         }
 
-        .scrap-card {
+        .card {
             background: white;
             padding: 25px;
             box-shadow: var(--shadow);
-            min-height: 250px;
+            border-radius: 2px;
+            position: relative;
         }
 
-        .card-h2 {
+        .card:nth-child(odd) { transform: rotate(-0.5deg); }
+        .card:nth-child(even) { transform: rotate(0.5deg); }
+
+        .title-h2 {
             font-family: 'Playfair Display', serif;
             font-style: italic;
             font-size: 20px;
             color: var(--accent);
-            border-bottom: 1px solid #f0f0f0;
             margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            border-bottom: 1px solid #f9f9f9;
         }
 
-        /* TAREAS */
-        .todo-input-group { display: flex; gap: 5px; margin-bottom: 15px; }
-        .todo-input-group input { flex: 1; border: 1px solid #eee; padding: 8px; outline: none; border-radius: 4px; }
-        .todo-input-group button { background: var(--accent); color: white; border: none; padding: 5px 12px; cursor: pointer; border-radius: 4px; }
-        
-        .todo-list { list-style: none; padding: 0; }
-        .todo-item { 
-            display: flex; 
-            justify-content: space-between; 
-            padding: 8px 0; 
-            border-bottom: 1px solid #fafafa;
-            font-size: 14px;
-        }
-        .task-text { cursor: pointer; flex: 1; }
-        .task-text.done { text-decoration: line-through; opacity: 0.4; }
-        .del-btn { color: #ccc; cursor: pointer; font-size: 12px; margin-left: 10px; border: none; background: none; }
-        .del-btn:hover { color: var(--accent); }
+        /* TAREAS Y TABLAS */
+        .todo-list { list-style: none; padding: 0; font-size: 13px; }
+        .todo-item { cursor: pointer; display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #fcfcfc; }
+        .todo-item.done { text-decoration: line-through; opacity: 0.4; }
 
-        /* TABLAS DINÁMICAS */
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; font-size: 12px; color: var(--accent); padding-bottom: 8px; border-bottom: 2px solid #f0f0f0; }
-        td { padding: 10px 0; border-bottom: 1px solid #f9f9f9; font-size: 13px; outline: none; }
-        .add-row-btn { font-size: 11px; color: var(--accent); cursor: pointer; background: none; border: 1px solid var(--accent); padding: 2px 8px; border-radius: 10px; margin-top: 10px; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        th { text-align: left; color: var(--accent); padding: 5px 0; border-bottom: 1px solid #eee; }
+        td { padding: 8px 0; border-bottom: 1px solid #f9f9f9; }
 
+        /* BARRA DE PROGRESO */
+        .bar-bg { background: #eee; height: 3px; width: 100%; margin: 10px 0; border-radius: 5px; overflow: hidden; }
+        .bar-fill { background: var(--accent); height: 100%; width: 0%; transition: 0.8s; }
+
+        .add-btn { background: none; border: 1px solid var(--accent); color: var(--accent); cursor: pointer; border-radius: 50%; padding: 0 6px; }
+        input { border: none; border-bottom: 1px solid #eee; outline: none; font-size: 12px; }
+        .editable { outline: none; }
     </style>
 </head>
 <body>
 
     <nav class="shortcuts">
         <a href="https://www.canva.com" target="_blank" class="shortcut-link">Canva</a>
-        <a href="https://chat.openai.com" target="_blank" class="shortcut-link">ChatGPT</a>
-        <a href="https://notebooklm.google.com" target="_blank" class="shortcut-link">NotebookLM</a>
         <a href="https://gemini.google.com" target="_blank" class="shortcut-link">Gemini</a>
         <a href="https://classroom.google.com" target="_blank" class="shortcut-link">Classroom</a>
         <a href="https://drive.google.com" target="_blank" class="shortcut-link">Drive</a>
     </nav>
 
-    <div class="header-section">
+    <div class="header">
         <h1 class="main-title" id="m-title" contenteditable="true">Danna Stanton!</h1>
-        <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Snoopy_Peanuts.png" class="snoopy-img">
+        <div id="versiculo" contenteditable="true" style="font-family:'Playfair Display'; font-style:italic; font-size:14px; opacity:0.8;">"Todo lo puedo en Cristo que me fortalece."</div>
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Snoopy_Peanuts.png" class="snoopy-float">
     </div>
 
-    <div class="info-bar">
-        <div class="info-card">
-            <div class="days-box">Faltan <span id="days-val">0</span> días</div>
-            <input type="date" id="target-date" style="border:none; font-family: Montserrat; color: var(--accent);">
-        </div>
-        <div class="info-card">
-            <div style="font-family: 'Playfair Display'; font-style: italic;" id="versiculo" contenteditable="true">
-                "Todo lo puedo en Cristo que me fortalece." — Filipenses 4:13
+    <div class="container">
+        
+        <div class="card">
+            <h2 class="title-h2">Eventos y Fechas</h2>
+            <table>
+                <thead>
+                    <tr><th>Evento</th><th>Fecha</th><th>Faltan</th></tr>
+                </thead>
+                <tbody id="ev-body"></tbody>
+            </table>
+            <div style="margin-top:15px; display:flex; gap:5px;">
+                <input type="text" id="ev-n" placeholder="Evento..." style="width:45%">
+                <input type="date" id="ev-d">
+                <button class="add-btn" onclick="addEvent()">+</button>
             </div>
         </div>
-    </div>
 
-    <div class="collage-container">
-        
-        <div class="scrap-card">
-            <h2 class="card-h2">Tareas Colegio</h2>
-            <div class="todo-input-group">
-                <input type="text" id="in-col" placeholder="Nueva tarea...">
-                <button onclick="addTask('col')">+</button>
+        <div class="card" style="text-align: center;">
+            <h2 class="title-h2">Vision Board 2026</h2>
+            <img src="https://i.pinimg.com/originals/91/92/7d/91927d6c63e236f0490b4d455447a12a.jpg" style="width:100%; height:120px; object-fit:cover; border:4px solid white; box-shadow:var(--shadow);">
+            <div id="meta" contenteditable="true" style="font-weight:600; font-size:12px; margin:10px 0; color:var(--accent);">Objetivo: Universidad de Antioquia</div>
+            
+            <div style="font-size:10px; letter-spacing:1px;">PROGRESO ACADÉMICO: <span id="p-val" contenteditable="true">15</span>%</div>
+            <div class="bar-bg"><div class="bar-fill" id="p-bar"></div></div>
+        </div>
+
+        <div class="card">
+            <h2 class="title-h2">Colegio</h2>
+            <div style="display:flex; gap:5px; margin-bottom:10px;">
+                <input type="text" id="in-col" placeholder="Añadir..." style="flex:1">
+                <button class="add-btn" onclick="addTask('col')">+</button>
             </div>
             <ul id="list-col" class="todo-list"></ul>
         </div>
 
-        <div class="scrap-card">
-            <h2 class="card-h2">Preuniversitario</h2>
-            <div class="todo-input-group">
-                <input type="text" id="in-pre" placeholder="Nueva tarea...">
-                <button onclick="addTask('pre')">+</button>
+        <div class="card">
+            <h2 class="title-h2">Preuniversitario</h2>
+            <div style="display:flex; gap:5px; margin-bottom:10px;">
+                <input type="text" id="in-pre" placeholder="Añadir..." style="flex:1">
+                <button class="add-btn" onclick="addTask('pre')">+</button>
             </div>
             <ul id="list-pre" class="todo-list"></ul>
         </div>
 
-        <div class="scrap-card">
-            <h2 class="card-h2">Personales</h2>
-            <div class="todo-input-group">
-                <input type="text" id="in-per" placeholder="Nueva tarea...">
-                <button onclick="addTask('per')">+</button>
+        <div class="card">
+            <h2 class="title-h2">Personales</h2>
+            <div style="display:flex; gap:5px; margin-bottom:10px;">
+                <input type="text" id="in-per" placeholder="Añadir..." style="flex:1">
+                <button class="add-btn" onclick="addTask('per')">+</button>
             </div>
             <ul id="list-per" class="todo-list"></ul>
         </div>
 
-        <div class="scrap-card">
-            <h2 class="card-h2">Registro de Costos</h2>
-            <table id="table-costos">
-                <thead><tr><th>Concepto</th><th>Valor</th></tr></thead>
-                <tbody id="body-costos"></tbody>
-            </table>
-            <button class="add-row-btn" onclick="addRow('costos')">+ Agregar Fila</button>
-        </div>
-
-        <div class="scrap-card">
-            <h2 class="card-h2">Puntajes y Simulacros</h2>
-            <table id="table-puntajes">
-                <thead><tr><th>Prueba</th><th>Puntaje</th></tr></thead>
-                <tbody id="body-puntajes"></tbody>
-            </table>
-            <button class="add-row-btn" onclick="addRow('puntajes')">+ Agregar Fila</button>
+        <div class="card">
+            <h2 class="title-h2">Costos y Puntajes</h2>
+            <div class="editable" id="records" contenteditable="true">
+                <table>
+                    <tr><th>Ítem</th><th>Dato</th></tr>
+                    <tr><td>Pin UdeA</td><td>$74.000</td></tr>
+                    <tr><td>Simulacro 1</td><td>375 Pts</td></tr>
+                </table>
+            </div>
         </div>
 
     </div>
 
     <script>
-        const storageIds = ['m-title', 'versiculo', 'target-date'];
-        
+        const storeIds = ['m-title', 'versiculo', 'meta', 'p-val', 'records'];
+
         window.onload = () => {
-            storageIds.forEach(id => {
-                const saved = localStorage.getItem(id);
-                if(saved) {
-                    if(id === 'target-date') document.getElementById(id).value = saved;
-                    else document.getElementById(id).innerHTML = saved;
-                }
+            storeIds.forEach(id => {
+                const s = localStorage.getItem(id);
+                if(s) document.getElementById(id).innerHTML = s;
             });
-            ['col', 'pre', 'per'].forEach(type => renderTasks(type));
-            loadTable('costos');
-            loadTable('puntajes');
-            updateCountdown();
+            ['col', 'pre', 'per'].forEach(t => renderTasks(t));
+            renderEvents();
+            updateBar();
         };
 
         document.addEventListener('input', (e) => {
-            if(storageIds.includes(e.target.id)) {
-                localStorage.setItem(e.target.id, e.target.value || e.target.innerHTML);
-                if(e.target.id === 'target-date') updateCountdown();
-            }
-            if(e.target.closest('tbody')) {
-                const type = e.target.closest('tbody').id.split('-')[1];
-                saveTable(type);
+            if(storeIds.includes(e.target.id)) {
+                localStorage.setItem(e.target.id, e.target.innerHTML);
+                if(e.target.id === 'p-val') updateBar();
             }
         });
 
-        function updateCountdown() {
-            const date = document.getElementById('target-date').value;
-            if(!date) return;
-            const diff = new Date(date) - new Date();
-            document.getElementById('days-val').innerText = Math.max(0, Math.ceil(diff / (1000*60*60*24)));
+        function updateBar() {
+            let v = parseInt(document.getElementById('p-val').innerText) || 0;
+            document.getElementById('p-bar').style.width = v + '%';
         }
 
-        // TAREAS (AGREGAR, TACHAR, ELIMINAR)
-        function addTask(type) {
-            const input = document.getElementById('in-' + type);
+        // EVENTOS
+        function addEvent() {
+            const n = document.getElementById('ev-n').value, d = document.getElementById('ev-d').value;
+            if(!n || !d) return;
+            const evs = JSON.parse(localStorage.getItem('evs-d') || '[]');
+            evs.push({n, d});
+            localStorage.setItem('evs-d', JSON.stringify(evs));
+            renderEvents();
+        }
+
+        function renderEvents() {
+            const evs = JSON.parse(localStorage.getItem('evs-d') || '[]');
+            document.getElementById('ev-body').innerHTML = evs.map(e => {
+                const diff = Math.ceil((new Date(e.d) - new Date()) / (1000*60*60*24));
+                return `<tr><td>${e.n}</td><td>${e.d}</td><td><b>${diff > 0 ? diff : 0}d</b></td></tr>`;
+            }).join('');
+        }
+
+        // TAREAS
+        function addTask(t) {
+            const input = document.getElementById('in-' + t);
             if(!input.value) return;
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + type) || '[]');
+            const tasks = JSON.parse(localStorage.getItem('tk-' + t) || '[]');
             tasks.push({ text: input.value, done: false });
-            localStorage.setItem('tasks-' + type, JSON.stringify(tasks));
+            localStorage.setItem('tk-' + t, JSON.stringify(tasks));
             input.value = '';
-            renderTasks(type);
+            renderTasks(t);
         }
 
-        function toggleTask(type, index) {
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + type));
-            tasks[index].done = !tasks[index].done;
-            localStorage.setItem('tasks-' + type, JSON.stringify(tasks));
-            renderTasks(type);
+        function toggleTask(t, i) {
+            const tasks = JSON.parse(localStorage.getItem('tk-' + t));
+            tasks[i].done = !tasks[i].done;
+            localStorage.setItem('tk-' + t, JSON.stringify(tasks));
+            renderTasks(t);
         }
 
-        function deleteTask(type, index) {
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + type));
-            tasks.splice(index, 1);
-            localStorage.setItem('tasks-' + type, JSON.stringify(tasks));
-            renderTasks(type);
-        }
-
-        function renderTasks(type) {
-            const list = document.getElementById('list-' + type);
-            const tasks = JSON.parse(localStorage.getItem('tasks-' + type) || '[]');
-            list.innerHTML = tasks.map((t, i) => `
-                <li class="todo-item">
-                    <span class="task-text ${t.done ? 'done' : ''}" onclick="toggleTask('${type}', ${i})">${t.text}</span>
-                    <button class="del-btn" onclick="deleteTask('${type}', ${i})">✕</button>
+        function renderTasks(t) {
+            const list = document.getElementById('list-' + t);
+            const tasks = JSON.parse(localStorage.getItem('tk-' + t) || '[]');
+            list.innerHTML = tasks.map((tk, i) => `
+                <li class="todo-item ${tk.done ? 'done' : ''}" onclick="toggleTask('${t}', ${i})">
+                    ${tk.text} <span>${tk.done ? '✓' : '○'}</span>
                 </li>
             `).join('');
-        }
-
-        // TABLAS DINÁMICAS
-        function addRow(type) {
-            const tbody = document.getElementById('body-' + type);
-            const row = document.createElement('tr');
-            row.innerHTML = `<td contenteditable="true">Nuevo...</td><td contenteditable="true">0</td>`;
-            tbody.appendChild(row);
-            saveTable(type);
-        }
-
-        function saveTable(type) {
-            const html = document.getElementById('body-' + type).innerHTML;
-            localStorage.setItem('table-' + type, html);
-        }
-
-        function loadTable(type) {
-            const saved = localStorage.getItem('table-' + type);
-            if(saved) document.getElementById('body-' + type).innerHTML = saved;
-            else {
-                // Filas por defecto si está vacío
-                document.getElementById('body-' + type).innerHTML = `<tr><td contenteditable="true">Click para editar</td><td contenteditable="true">0</td></tr>`;
-            }
         }
     </script>
 </body>
