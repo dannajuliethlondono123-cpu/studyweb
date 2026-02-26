@@ -146,4 +146,136 @@
                     <tr><th>Evento</th><th>Fecha</th><th>Faltan (Días)</th></tr>
                 </thead>
                 <tbody id="fechas-body" contenteditable="true">
-                    <tr><td>Entrega de Taller</td><td>2026-03-15</td><td>
+                    <tr><td>Entrega de Taller</td><td>2026-03-15</td><td>-</td></tr>
+                    <tr><td>Simulacro Nacional</td><td>2026-04-10</td><td>-</td></tr>
+                </tbody>
+            </table>
+            <button class="btn-add" onclick="calcularFechas()" style="margin-top:10px; width:100%">Actualizar Días</button>
+        </section>
+
+        <section>
+            <h2 contenteditable="true">💰 CONTROL DE COSTOS</h2>
+            <div id="costos" contenteditable="true" style="outline:none; min-height:100px;">
+                • Pin UdeA: $74.000<br>
+                • Pin ICFES: $
+            </div>
+        </section>
+
+        <section style="grid-column: span 2;">
+            <h2 contenteditable="true">📊 RASTREO DE PUNTAJES (40 Preguntas)</h2>
+            <table id="table-puntos">
+                <thead>
+                    <tr><th>Taller / Simulacro</th><th>Buenas</th><th>Total</th><th>% Logro</th></tr>
+                </thead>
+                <tbody id="puntos-body" contenteditable="true">
+                    <tr><td>Razonamiento 1</td><td>30</td><td>40</td><td>75%</td></tr>
+                    <tr><td>Lectura Crítica</td><td>35</td><td>40</td><td>87%</td></tr>
+                    <tr><td>...</td><td>...</td><td>40</td><td>...</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2 contenteditable="true">🧩 MINI BREAK (SUDOKU 3x3)</h2>
+            <div class="sudoku-grid" id="sudoku">
+                <input type="text" maxlength="1"> <input type="text" maxlength="1"> <input type="text" maxlength="1">
+                <input type="text" maxlength="1"> <input type="text" maxlength="1"> <input type="text" maxlength="1">
+                <input type="text" maxlength="1"> <input type="text" maxlength="1"> <input type="text" maxlength="1">
+            </div>
+            <p style="font-size: 0.7em; text-align: center;">Llena del 1 al 9 sin repetir</p>
+        </section>
+    </div>
+
+    <div class="progreso-container">
+        <b>Progreso General: <span id="prog-num" contenteditable="true">10</span>%</b>
+        <div style="background:#eee; height:15px; border-radius:10px; margin-top:10px; border:2px solid #ddd; overflow:hidden;">
+            <div id="barra" style="background:var(--purple); width:10%; height:100%; transition:1s;"></div>
+        </div>
+    </div>
+
+    <script>
+        const ids = ['title', 'exam-date', 'label-examen', 'fechas-body', 'puntos-body', 'costos', 'prog-num'];
+
+        window.onload = () => {
+            ids.forEach(id => {
+                const saved = localStorage.getItem(id);
+                if(saved) {
+                    if(id === 'exam-date') document.getElementById(id).value = saved;
+                    else document.getElementById(id).innerHTML = saved;
+                }
+            });
+            ['cole','pre','pers'].forEach(renderTasks);
+            updateBar(); updateCountdown(); calcularFechas();
+        };
+
+        document.addEventListener('input', (e) => {
+            if(ids.includes(e.target.id)) {
+                localStorage.setItem(e.target.id, e.target.value || e.target.innerHTML);
+                if(e.target.id === 'prog-num') updateBar();
+                if(e.target.id === 'exam-date') updateCountdown();
+            }
+        });
+
+        function updateBar() {
+            let n = parseInt(document.getElementById('prog-num').innerText) || 0;
+            document.getElementById('barra').style.width = n + '%';
+        }
+
+        function updateCountdown() {
+            const date = document.getElementById('exam-date').value;
+            if(!date) return;
+            const diff = new Date(date) - new Date();
+            document.getElementById('days-count').innerText = Math.max(0, Math.ceil(diff / (1000*60*60*24)));
+        }
+
+        function calcularFechas() {
+            const rows = document.querySelectorAll('#fechas-body tr');
+            const hoy = new Date();
+            rows.forEach(row => {
+                const fechaStr = row.cells[1].innerText.trim();
+                const target = new Date(fechaStr);
+                if(!isNaN(target)) {
+                    const diff = Math.ceil((target - hoy) / (1000*60*60*24));
+                    row.cells[2].innerText = diff > 0 ? diff : "¡Hoy!";
+                }
+            });
+            localStorage.setItem('fechas-body', document.getElementById('fechas-body').innerHTML);
+        }
+
+        // TAREAS
+        function addTask(cat) {
+            const input = document.getElementById('in-' + cat);
+            if(!input.value) return;
+            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat) || '[]');
+            tasks.push({ text: input.value, done: false });
+            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
+            input.value = ''; renderTasks(cat);
+        }
+
+        function toggleTask(cat, index) {
+            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat));
+            tasks[index].done = !tasks[index].done;
+            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
+            renderTasks(cat);
+        }
+
+        function delTask(cat, index) {
+            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat));
+            tasks.splice(index, 1);
+            localStorage.setItem('tasks-' + cat, JSON.stringify(tasks));
+            renderTasks(cat);
+        }
+
+        function renderTasks(cat) {
+            const list = document.getElementById('list-' + cat);
+            const tasks = JSON.parse(localStorage.getItem('tasks-' + cat) || '[]');
+            list.innerHTML = tasks.map((t, i) => `
+                <div class="task-item">
+                    <span class="task-text ${t.done ? 'done' : ''}" onclick="toggleTask('${cat}', ${i})">${t.text}</span>
+                    <button class="del-btn" onclick="delTask('${cat}', ${i})">X</button>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
