@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DANNA'S PINK QUEST 2026</title>
+    <title>DANNA'S COQUETTE QUEST 2026</title>
     <style>
         :root {
-            --bg-pink: #ffeef2; /* Rosado tenue bonito */
             --purple: #9b6dff;
-            --white: #ffffff;
-            --dark-purple: #7b4dff;
+            --pink: #ff85a1;
+            --soft-pink: #fff0f3;
+            --white: rgba(255, 255, 255, 0.9);
         }
 
         body {
-            background-color: var(--bg-pink);
+            /* Fondo de flores sutil */
+            background-color: #ffeef2;
+            background-image: url('https://www.transparenttextures.com/patterns/floral-paper.png'); 
             font-family: 'Segoe UI', sans-serif;
             margin: 0; padding: 20px;
             display: flex; flex-direction: column; align-items: center;
         }
 
-        /* HEADER */
         .header {
             background: var(--white);
             border: 8px solid var(--purple);
@@ -27,18 +28,16 @@
             padding: 30px; width: 95%; max-width: 1100px;
             position: relative; text-align: center;
             box-shadow: 0 12px 0 var(--purple); margin-bottom: 30px;
+            backdrop-filter: blur(5px);
         }
 
         #title {
             font-family: 'Georgia', serif; font-style: italic;
-            font-size: 2.8em; margin: 10px 0; outline: none;
+            font-size: 2.8em; margin: 10px 0; outline: none; color: #444;
         }
-
-        .edit-label { outline: none; display: inline-block; }
 
         .snoopy { position: absolute; right: 30px; top: 15px; width: 85px; }
 
-        /* GRID PRINCIPAL */
         .main-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -52,45 +51,26 @@
             box-shadow: 8px 8px 0 rgba(155, 109, 255, 0.1);
         }
 
-        h2 { 
-            color: var(--purple); border-bottom: 4px dashed #eee; 
-            padding-bottom: 10px; font-size: 1.1em; text-align: center;
-            margin-top: 0; outline: none;
+        h2 { color: var(--purple); border-bottom: 4px dashed #eee; padding-bottom: 10px; font-size: 1.1em; text-align: center; margin-top: 0; outline: none; }
+
+        /* TABLAS MEJORADAS */
+        table { width: 100%; border-collapse: collapse; font-size: 0.85em; margin-bottom: 10px; }
+        th { background: var(--purple); color: white; padding: 8px; border-radius: 5px; }
+        td { border-bottom: 1px solid #ddd; padding: 8px; text-align: center; outline: none; }
+
+        .btn-add-row {
+            background: var(--pink); color: white; border: none; padding: 5px 10px;
+            border-radius: 10px; cursor: pointer; font-size: 0.8em; width: 100%;
         }
 
-        /* TAREAS */
-        .task-input-row { display: flex; gap: 5px; margin-bottom: 10px; }
-        .task-input-row input { flex: 1; padding: 8px; border: 2px solid #ddd; border-radius: 10px; }
-        .btn-add { background: var(--purple); color: white; border: none; padding: 8px; border-radius: 10px; cursor: pointer; }
-        
-        .task-list { list-style: none; padding: 0; }
-        .task-item { 
-            background: #fff5f8; margin-bottom: 6px; padding: 8px; 
-            border-radius: 12px; display: flex; justify-content: space-between; 
-            align-items: center; border-left: 5px solid var(--purple);
-        }
-        .task-text { cursor: pointer; flex: 1; font-size: 0.9em; }
-        .task-text.done { text-decoration: line-through; opacity: 0.5; }
-        .del-btn { color: white; background: #ff85a1; border: none; border-radius: 5px; padding: 2px 7px; cursor: pointer; }
+        /* MOOD TRACKER */
+        .mood-box { display: flex; justify-content: space-around; font-size: 1.5em; margin-top: 10px; }
+        .mood-btn { cursor: pointer; transition: 0.3s; filter: grayscale(1); }
+        .mood-btn:hover, .mood-btn.active { filter: grayscale(0); transform: scale(1.2); }
 
-        /* TABLAS */
-        table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
-        th { background: var(--purple); color: white; padding: 5px; }
-        td { border: 1px solid #eee; padding: 5px; text-align: center; }
-
-        /* SUDOKU MINI */
-        .sudoku-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 5px; width: 150px; margin: 10px auto;
-        }
-        .sudoku-grid input {
-            width: 40px; height: 40px; text-align: center; border: 2px solid var(--purple);
-            border-radius: 8px; font-weight: bold;
-        }
-
-        /* BARRA PROGRESO */
+        /* PROGRESO */
         .progreso-container {
-            margin-top: 20px; background: white; padding: 20px;
+            margin-top: 20px; background: var(--white); padding: 20px;
             border: 8px solid var(--purple); border-radius: 30px;
             width: 90%; max-width: 400px; text-align: center;
         }
@@ -103,9 +83,8 @@
     <div class="header">
         <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Snoopy_Peanuts.png" class="snoopy">
         <h1 id="title" contenteditable="true">Danna's Elite Quest 2026</h1>
-        <div style="font-weight: bold; font-size: 1.2em;">
-            <span class="edit-label" id="label-examen" contenteditable="true">DÍAS PARA EL EXAMEN:</span> 
-            <span id="days-count">00</span>
+        <div style="font-weight: bold; font-size: 1.1em;">
+            <span contenteditable="true">CUENTA REGRESIVA:</span> <span id="days-count">00</span> DÍAS
             <br>
             <input type="date" id="exam-date" style="border: 2px solid var(--purple); border-radius: 8px; margin-top: 5px;">
         </div>
@@ -113,88 +92,82 @@
 
     <div class="main-grid">
         <section>
-            <h2 contenteditable="true">✅ TAREAS COLEGIO</h2>
-            <div class="task-input-row">
-                <input type="text" id="in-cole" placeholder="Nueva tarea cole...">
-                <button class="btn-add" onclick="addTask('cole')">+</button>
-            </div>
-            <div id="list-cole" class="task-list"></div>
+            <h2 contenteditable="true">✅ COLEGIO</h2>
+            <input type="text" id="in-cole" placeholder="Nueva tarea..." style="width:70%; padding:5px; border-radius:5px; border:1px solid #ddd;">
+            <button onclick="addTask('cole')" style="background:var(--purple); color:white; border:none; padding:5px 10px; border-radius:5px;">+</button>
+            <div id="list-cole"></div>
         </section>
 
         <section>
-            <h2 contenteditable="true">🚀 TAREAS PRE-U / UdeA</h2>
-            <div class="task-input-row">
-                <input type="text" id="in-pre" placeholder="Nueva tarea Pre-U...">
-                <button class="btn-add" onclick="addTask('pre')">+</button>
-            </div>
-            <div id="list-pre" class="task-list"></div>
+            <h2 contenteditable="true">🚀 PRE-U / UdeA</h2>
+            <input type="text" id="in-pre" placeholder="Nueva tarea..." style="width:70%; padding:5px; border-radius:5px; border:1px solid #ddd;">
+            <button onclick="addTask('pre')" style="background:var(--purple); color:white; border:none; padding:5px 10px; border-radius:5px;">+</button>
+            <div id="list-pre"></div>
         </section>
 
         <section>
-            <h2 contenteditable="true">✨ TAREAS PERSONALES</h2>
-            <div class="task-input-row">
-                <input type="text" id="in-pers" placeholder="Otra tarea...">
-                <button class="btn-add" onclick="addTask('pers')">+</button>
-            </div>
-            <div id="list-pers" class="task-list"></div>
+            <h2 contenteditable="true">✨ PERSONALES</h2>
+            <input type="text" id="in-pers" placeholder="Nueva tarea..." style="width:70%; padding:5px; border-radius:5px; border:1px solid #ddd;">
+            <button onclick="addTask('pers')" style="background:var(--purple); color:white; border:none; padding:5px 10px; border-radius:5px;">+</button>
+            <div id="list-pers"></div>
         </section>
 
         <section style="grid-column: span 2;">
             <h2 contenteditable="true">📅 FECHAS IMPORTANTES</h2>
             <table id="table-fechas">
-                <thead>
-                    <tr><th>Evento</th><th>Fecha</th><th>Faltan (Días)</th></tr>
-                </thead>
+                <thead><tr><th>Evento</th><th>Fecha (AAAA-MM-DD)</th><th>Faltan</th></tr></thead>
                 <tbody id="fechas-body" contenteditable="true">
-                    <tr><td>Entrega de Taller</td><td>2026-03-15</td><td>-</td></tr>
-                    <tr><td>Simulacro Nacional</td><td>2026-04-10</td><td>-</td></tr>
+                    <tr><td>Examen UdeA</td><td>2026-05-20</td><td>-</td></tr>
                 </tbody>
             </table>
-            <button class="btn-add" onclick="calcularFechas()" style="margin-top:10px; width:100%">Actualizar Días</button>
+            <button class="btn-add-row" onclick="addRow('fechas-body', 3)">➕ Agregar Evento</button>
+            <button onclick="calcularFechas()" style="margin-top:5px; width:100%; border-radius:10px; cursor:pointer;">🔄 Calcular Días</button>
         </section>
 
         <section>
-            <h2 contenteditable="true">💰 CONTROL DE COSTOS</h2>
-            <div id="costos" contenteditable="true" style="outline:none; min-height:100px;">
-                • Pin UdeA: $74.000<br>
-                • Pin ICFES: $
-            </div>
+            <h2 contenteditable="true">💰 CONTROL GASTOS</h2>
+            <table>
+                <thead><tr><th>Concepto</th><th>Precio</th></tr></thead>
+                <tbody id="gastos-body" contenteditable="true">
+                    <tr><td>Pin UdeA</td><td>$74.000</td></tr>
+                </tbody>
+            </table>
+            <button class="btn-add-row" onclick="addRow('gastos-body', 2)">➕ Agregar Gasto</button>
         </section>
 
         <section style="grid-column: span 2;">
-            <h2 contenteditable="true">📊 RASTREO DE PUNTAJES (40 Preguntas)</h2>
-            <table id="table-puntos">
-                <thead>
-                    <tr><th>Taller / Simulacro</th><th>Buenas</th><th>Total</th><th>% Logro</th></tr>
-                </thead>
+            <h2 contenteditable="true">📊 RASTREO PUNTAJES (40 Preg.)</h2>
+            <table>
+                <thead><tr><th>Taller</th><th>Buenas</th><th>Total</th><th>%</th></tr></thead>
                 <tbody id="puntos-body" contenteditable="true">
-                    <tr><td>Razonamiento 1</td><td>30</td><td>40</td><td>75%</td></tr>
-                    <tr><td>Lectura Crítica</td><td>35</td><td>40</td><td>87%</td></tr>
-                    <tr><td>...</td><td>...</td><td>40</td><td>...</td></tr>
+                    <tr><td>Lógica 1</td><td>32</td><td>40</td><td>80%</td></tr>
                 </tbody>
             </table>
+            <button class="btn-add-row" onclick="addRow('puntos-body', 4)">➕ Agregar Resultado</button>
         </section>
 
         <section>
-            <h2 contenteditable="true">🧩 MINI BREAK (SUDOKU 3x3)</h2>
-            <div class="sudoku-grid" id="sudoku">
-                <input type="text" maxlength="1"> <input type="text" maxlength="1"> <input type="text" maxlength="1">
-                <input type="text" maxlength="1"> <input type="text" maxlength="1"> <input type="text" maxlength="1">
-                <input type="text" maxlength="1"> <input type="text" maxlength="1"> <input type="text" maxlength="1">
+            <h2 contenteditable="true">🌈 MOOD DE HOY</h2>
+            <div class="mood-box" id="mood-tracker">
+                <span class="mood-btn" onclick="setMood(this)">✨</span>
+                <span class="mood-btn" onclick="setMood(this)">📚</span>
+                <span class="mood-btn" onclick="setMood(this)">😴</span>
+                <span class="mood-btn" onclick="setMood(this)">🎯</span>
+                <span class="mood-btn" onclick="setMood(this)">💖</span>
             </div>
-            <p style="font-size: 0.7em; text-align: center;">Llena del 1 al 9 sin repetir</p>
+            <p style="text-align:center; font-size:0.8em; color:#888;">¿Cómo va tu energía hoy?</p>
         </section>
     </div>
 
     <div class="progreso-container">
-        <b>Progreso General: <span id="prog-num" contenteditable="true">10</span>%</b>
+        <b>MI PROGRESO HACIA LA META: <span id="prog-num" contenteditable="true">10</span>%</b>
         <div style="background:#eee; height:15px; border-radius:10px; margin-top:10px; border:2px solid #ddd; overflow:hidden;">
             <div id="barra" style="background:var(--purple); width:10%; height:100%; transition:1s;"></div>
         </div>
     </div>
 
     <script>
-        const ids = ['title', 'exam-date', 'label-examen', 'fechas-body', 'puntos-body', 'costos', 'prog-num'];
+        const ids = ['title', 'exam-date', 'fechas-body', 'puntos-body', 'gastos-body', 'prog-num'];
 
         window.onload = () => {
             ids.forEach(id => {
@@ -210,11 +183,25 @@
 
         document.addEventListener('input', (e) => {
             if(ids.includes(e.target.id)) {
-                localStorage.setItem(e.target.id, e.target.value || e.target.innerHTML);
+                localStorage.setItem(e.target.id, e.target.innerHTML || e.target.value);
                 if(e.target.id === 'prog-num') updateBar();
                 if(e.target.id === 'exam-date') updateCountdown();
             }
         });
+
+        function addRow(id, cols) {
+            const table = document.getElementById(id);
+            const row = table.insertRow();
+            for(let i=0; i<cols; i++) {
+                row.insertCell(i).innerHTML = "-";
+            }
+            localStorage.setItem(id, table.innerHTML);
+        }
+
+        function setMood(btn) {
+            document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
 
         function updateBar() {
             let n = parseInt(document.getElementById('prog-num').innerText) || 0;
@@ -230,19 +217,16 @@
 
         function calcularFechas() {
             const rows = document.querySelectorAll('#fechas-body tr');
-            const hoy = new Date();
             rows.forEach(row => {
-                const fechaStr = row.cells[1].innerText.trim();
-                const target = new Date(fechaStr);
-                if(!isNaN(target)) {
-                    const diff = Math.ceil((target - hoy) / (1000*60*60*24));
-                    row.cells[2].innerText = diff > 0 ? diff : "¡Hoy!";
+                const f = new Date(row.cells[1].innerText.trim());
+                if(!isNaN(f)) {
+                    const d = Math.ceil((f - new Date()) / (1000*60*60*24));
+                    row.cells[2].innerText = d > 0 ? d : "¡Hoy!";
                 }
             });
-            localStorage.setItem('fechas-body', document.getElementById('fechas-body').innerHTML);
         }
 
-        // TAREAS
+        // TAREAS (Tachar/Borrar)
         function addTask(cat) {
             const input = document.getElementById('in-' + cat);
             if(!input.value) return;
@@ -270,9 +254,9 @@
             const list = document.getElementById('list-' + cat);
             const tasks = JSON.parse(localStorage.getItem('tasks-' + cat) || '[]');
             list.innerHTML = tasks.map((t, i) => `
-                <div class="task-item">
-                    <span class="task-text ${t.done ? 'done' : ''}" onclick="toggleTask('${cat}', ${i})">${t.text}</span>
-                    <button class="del-btn" onclick="delTask('${cat}', ${i})">X</button>
+                <div style="display:flex; justify-content:space-between; background:#fff5f8; margin:5px 0; padding:8px; border-radius:10px; border-left:4px solid var(--purple);">
+                    <span style="cursor:pointer; ${t.done?'text-decoration:line-through; opacity:0.5':''}" onclick="toggleTask('${cat}', ${i})">${t.text}</span>
+                    <button onclick="delTask('${cat}', ${i})" style="border:none; background:none; color:var(--pink); cursor:pointer; font-weight:bold;">X</button>
                 </div>
             `).join('');
         }
