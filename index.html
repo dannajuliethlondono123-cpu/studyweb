@@ -3,269 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DANNA'S QUEST - FINAL EDITION</title>
+    <title>DANNA'S QUEST - PREMIUM JOURNAL</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&family=Montserrat:wght@300;400;600&family=Alex+Brush&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #fdfcfb;
-            --accent: #8b1d2f;
-            --shadow: 0 10px 30px rgba(0,0,0,0.05);
+            --wine: #8b1d2f;
+            --gold: #c5a059;
+            --shadow: 0 8px 20px rgba(0,0,0,0.06);
         }
 
         body {
             background-color: var(--bg);
-            margin: 0;
             font-family: 'Montserrat', sans-serif;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-bottom: 80px;
+            margin: 0; padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
         }
 
         /* BARRA DE ATAJOS */
         .shortcuts {
-            width: 100%;
-            padding: 15px 0;
-            background: white;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center;
         }
-
-        .shortcut-link {
-            text-decoration: none;
-            color: var(--accent);
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .shortcut-btn {
+            background: white; border: 1px solid #eee; padding: 8px 15px;
+            border-radius: 20px; text-decoration: none; color: #555;
+            font-size: 11px; font-weight: 600; transition: 0.3s; box-shadow: var(--shadow);
         }
+        .shortcut-btn:hover { background: var(--wine); color: white; transform: translateY(-3px); }
 
         /* HEADER */
-        .header {
-            text-align: center;
-            margin: 40px 0;
-            position: relative;
-        }
-
         .main-title {
-            font-family: 'Alex Brush', cursive;
-            font-size: 80px;
-            color: var(--accent);
-            margin: 0;
+            font-family: 'Alex Brush', cursive; font-size: clamp(50px, 8vw, 80px);
+            color: var(--wine); margin: 0; text-align: center;
         }
 
-        .snoopy-float {
-            position: absolute;
-            right: -60px;
-            top: 10px;
-            width: 70px;
-            transform: rotate(10deg);
-            border: 3px solid white;
-            box-shadow: var(--shadow);
+        /* CONTENEDOR DE SECCIONES */
+        .journal-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px; width: 95%; max-width: 1200px; margin-top: 40px;
         }
 
-        /* GRID COLLAGE */
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 25px;
-            width: 92%;
-            max-width: 1250px;
+        .paper-card {
+            background: white; padding: 25px; box-shadow: var(--shadow);
+            border-radius: 2px; position: relative; border-top: 4px solid var(--wine);
         }
 
-        .card {
-            background: white;
-            padding: 25px;
-            box-shadow: var(--shadow);
-            border-radius: 2px;
-            position: relative;
+        .paper-card h2 {
+            font-family: 'Playfair Display', serif; font-style: italic;
+            color: var(--wine); border-bottom: 1px solid #eee; padding-bottom: 10px;
         }
 
-        .card:nth-child(odd) { transform: rotate(-0.5deg); }
-        .card:nth-child(even) { transform: rotate(0.5deg); }
-
-        .title-h2 {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 20px;
-            color: var(--accent);
-            margin-bottom: 15px;
-            border-bottom: 1px solid #f9f9f9;
+        /* TABLAS Y LISTAS */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+        th { text-align: left; color: var(--gold); padding: 8px; border-bottom: 2px solid #f9f9f9; }
+        td { padding: 8px; border-bottom: 1px solid #f9f9f9; }
+        
+        input, select {
+            border: 1px solid #eee; padding: 5px; border-radius: 4px; outline: none; font-family: inherit;
         }
 
-        /* TAREAS Y TABLAS */
-        .todo-list { list-style: none; padding: 0; font-size: 13px; }
-        .todo-item { cursor: pointer; display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #fcfcfc; }
-        .todo-item.done { text-decoration: line-through; opacity: 0.4; }
+        .btn-add {
+            background: var(--wine); color: white; border: none; padding: 5px 12px;
+            border-radius: 15px; cursor: pointer; font-size: 12px; margin-top: 10px;
+        }
 
-        table { width: 100%; border-collapse: collapse; font-size: 12px; }
-        th { text-align: left; color: var(--accent); padding: 5px 0; border-bottom: 1px solid #eee; }
-        td { padding: 8px 0; border-bottom: 1px solid #f9f9f9; }
+        /* TAREAS */
+        .todo-item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 8px 0; border-bottom: 1px solid #f9f9f9; font-size: 14px;
+        }
+        .todo-item.done { text-decoration: line-through; opacity: 0.5; }
+        .delete-btn { color: #ccc; cursor: pointer; font-size: 10px; }
+        .delete-btn:hover { color: var(--wine); }
 
-        /* BARRA DE PROGRESO */
-        .bar-bg { background: #eee; height: 3px; width: 100%; margin: 10px 0; border-radius: 5px; overflow: hidden; }
-        .bar-fill { background: var(--accent); height: 100%; width: 0%; transition: 0.8s; }
-
-        .add-btn { background: none; border: 1px solid var(--accent); color: var(--accent); cursor: pointer; border-radius: 50%; padding: 0 6px; }
-        input { border: none; border-bottom: 1px solid #eee; outline: none; font-size: 12px; }
-        .editable { outline: none; }
     </style>
 </head>
 <body>
 
-    <nav class="shortcuts">
-        <a href="https://www.canva.com" target="_blank" class="shortcut-link">Canva</a>
-        <a href="https://gemini.google.com" target="_blank" class="shortcut-link">Gemini</a>
-        <a href="https://classroom.google.com" target="_blank" class="shortcut-link">Classroom</a>
-        <a href="https://drive.google.com" target="_blank" class="shortcut-link">Drive</a>
-    </nav>
-
-    <div class="header">
-        <h1 class="main-title" id="m-title" contenteditable="true">Danna Stanton!</h1>
-        <div id="versiculo" contenteditable="true" style="font-family:'Playfair Display'; font-style:italic; font-size:14px; opacity:0.8;">"Todo lo puedo en Cristo que me fortalece."</div>
-        <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Snoopy_Peanuts.png" class="snoopy-float">
+    <div class="shortcuts">
+        <a href="https://www.canva.com" target="_blank" class="shortcut-btn">CANVA</a>
+        <a href="https://gemini.google.com" target="_blank" class="shortcut-btn">GEMINI</a>
+        <a href="https://classroom.google.com" target="_blank" class="shortcut-btn">CLASSROOM</a>
+        <a href="https://drive.google.com" target="_blank" class="shortcut-btn">DRIVE</a>
+        <a href="https://notebooklm.google.com" target="_blank" class="shortcut-btn">NOTEBOOK LM</a>
+        <a href="https://chatgpt.com" target="_blank" class="shortcut-btn">CHATGPT</a>
     </div>
 
-    <div class="container">
+    <h1 class="main-title" contenteditable="true">Danna Stanton!</h1>
+    <p style="font-family: 'Playfair Display'; font-style: italic;">Academic & Personal Journal 2026</p>
+
+    <div class="journal-grid">
         
-        <div class="card">
-            <h2 class="title-h2">Eventos y Fechas</h2>
+        <div class="paper-card">
+            <h2>📅 Eventos Importantes</h2>
+            <div style="display: flex; gap: 5px; margin-bottom: 15px;">
+                <input type="text" id="event-name" placeholder="Evento..." style="flex:2">
+                <select id="event-type">
+                    <option value="Colegio">Colegio</option>
+                    <option value="Preu">Preu</option>
+                    <option value="Personal">Personal</option>
+                </select>
+                <button class="btn-add" onclick="addEvent()">+</button>
+            </div>
             <table>
-                <thead>
-                    <tr><th>Evento</th><th>Fecha</th><th>Faltan</th></tr>
-                </thead>
-                <tbody id="ev-body"></tbody>
+                <thead><tr><th>Tipo</th><th>Evento</th><th></th></tr></thead>
+                <tbody id="event-table-body"></tbody>
             </table>
-            <div style="margin-top:15px; display:flex; gap:5px;">
-                <input type="text" id="ev-n" placeholder="Evento..." style="width:45%">
-                <input type="date" id="ev-d">
-                <button class="add-btn" onclick="addEvent()">+</button>
-            </div>
         </div>
 
-        <div class="card" style="text-align: center;">
-            <h2 class="title-h2">Vision Board 2026</h2>
-            <img src="https://i.pinimg.com/originals/91/92/7d/91927d6c63e236f0490b4d455447a12a.jpg" style="width:100%; height:120px; object-fit:cover; border:4px solid white; box-shadow:var(--shadow);">
-            <div id="meta" contenteditable="true" style="font-weight:600; font-size:12px; margin:10px 0; color:var(--accent);">Objetivo: Universidad de Antioquia</div>
-            
-            <div style="font-size:10px; letter-spacing:1px;">PROGRESO ACADÉMICO: <span id="p-val" contenteditable="true">15</span>%</div>
-            <div class="bar-bg"><div class="bar-fill" id="p-bar"></div></div>
+        <div class="paper-card">
+            <h2>✅ Lista de Tareas</h2>
+            <div style="display: flex; gap: 5px; margin-bottom: 15px;">
+                <input type="text" id="todo-input" placeholder="Nueva tarea..." style="flex:1">
+                <button class="btn-add" onclick="addTodo()">+</button>
+            </div>
+            <div id="todo-list"></div>
         </div>
 
-        <div class="card">
-            <h2 class="title-h2">Colegio</h2>
-            <div style="display:flex; gap:5px; margin-bottom:10px;">
-                <input type="text" id="in-col" placeholder="Añadir..." style="flex:1">
-                <button class="add-btn" onclick="addTask('col')">+</button>
+        <div class="paper-card">
+            <h2>💰 Registro de Costos</h2>
+            <div style="display: flex; gap: 5px; margin-bottom: 15px;">
+                <input type="text" id="cost-name" placeholder="Item..." style="flex:2">
+                <input type="number" id="cost-val" placeholder="$" style="flex:1">
+                <button class="btn-add" onclick="addCost()">+</button>
             </div>
-            <ul id="list-col" class="todo-list"></ul>
-        </div>
-
-        <div class="card">
-            <h2 class="title-h2">Preuniversitario</h2>
-            <div style="display:flex; gap:5px; margin-bottom:10px;">
-                <input type="text" id="in-pre" placeholder="Añadir..." style="flex:1">
-                <button class="add-btn" onclick="addTask('pre')">+</button>
-            </div>
-            <ul id="list-pre" class="todo-list"></ul>
-        </div>
-
-        <div class="card">
-            <h2 class="title-h2">Personales</h2>
-            <div style="display:flex; gap:5px; margin-bottom:10px;">
-                <input type="text" id="in-per" placeholder="Añadir..." style="flex:1">
-                <button class="add-btn" onclick="addTask('per')">+</button>
-            </div>
-            <ul id="list-per" class="todo-list"></ul>
-        </div>
-
-        <div class="card">
-            <h2 class="title-h2">Costos y Puntajes</h2>
-            <div class="editable" id="records" contenteditable="true">
-                <table>
-                    <tr><th>Ítem</th><th>Dato</th></tr>
-                    <tr><td>Pin UdeA</td><td>$74.000</td></tr>
-                    <tr><td>Simulacro 1</td><td>375 Pts</td></tr>
-                </table>
-            </div>
+            <table>
+                <thead><tr><th>Item</th><th>Costo</th><th></th></tr></thead>
+                <tbody id="cost-table-body"></tbody>
+            </table>
         </div>
 
     </div>
 
     <script>
-        const storeIds = ['m-title', 'versiculo', 'meta', 'p-val', 'records'];
-
+        // Cargar datos al iniciar
         window.onload = () => {
-            storeIds.forEach(id => {
-                const s = localStorage.getItem(id);
-                if(s) document.getElementById(id).innerHTML = s;
-            });
-            ['col', 'pre', 'per'].forEach(t => renderTasks(t));
             renderEvents();
-            updateBar();
+            renderTodos();
+            renderCosts();
         };
 
-        document.addEventListener('input', (e) => {
-            if(storeIds.includes(e.target.id)) {
-                localStorage.setItem(e.target.id, e.target.innerHTML);
-                if(e.target.id === 'p-val') updateBar();
-            }
-        });
-
-        function updateBar() {
-            let v = parseInt(document.getElementById('p-val').innerText) || 0;
-            document.getElementById('p-bar').style.width = v + '%';
+        // --- LÓGICA DE EVENTOS ---
+        function addEvent() {
+            const name = document.getElementById('event-name');
+            const type = document.getElementById('event-type');
+            if(!name.value) return;
+            const events = JSON.parse(localStorage.getItem('events') || '[]');
+            events.push({ name: name.value, type: type.value });
+            localStorage.setItem('events', JSON.stringify(events));
+            name.value = '';
+            renderEvents();
         }
 
-        // EVENTOS
-        function addEvent() {
-            const n = document.getElementById('ev-n').value, d = document.getElementById('ev-d').value;
-            if(!n || !d) return;
-            const evs = JSON.parse(localStorage.getItem('evs-d') || '[]');
-            evs.push({n, d});
-            localStorage.setItem('evs-d', JSON.stringify(evs));
+        function deleteEvent(index) {
+            const events = JSON.parse(localStorage.getItem('events'));
+            events.splice(index, 1);
+            localStorage.setItem('events', JSON.stringify(events));
             renderEvents();
         }
 
         function renderEvents() {
-            const evs = JSON.parse(localStorage.getItem('evs-d') || '[]');
-            document.getElementById('ev-body').innerHTML = evs.map(e => {
-                const diff = Math.ceil((new Date(e.d) - new Date()) / (1000*60*60*24));
-                return `<tr><td>${e.n}</td><td>${e.d}</td><td><b>${diff > 0 ? diff : 0}d</b></td></tr>`;
-            }).join('');
+            const list = JSON.parse(localStorage.getItem('events') || '[]');
+            document.getElementById('event-table-body').innerHTML = list.map((e, i) => `
+                <tr>
+                    <td style="color: ${e.type=='Preu'?'var(--gold)':'#777'}">${e.type}</td>
+                    <td>${e.name}</td>
+                    <td class="delete-btn" onclick="deleteEvent(${i})">✕</td>
+                </tr>
+            `).join('');
         }
 
-        // TAREAS
-        function addTask(t) {
-            const input = document.getElementById('in-' + t);
+        // --- LÓGICA DE TAREAS ---
+        function addTodo() {
+            const input = document.getElementById('todo-input');
             if(!input.value) return;
-            const tasks = JSON.parse(localStorage.getItem('tk-' + t) || '[]');
-            tasks.push({ text: input.value, done: false });
-            localStorage.setItem('tk-' + t, JSON.stringify(tasks));
+            const todos = JSON.parse(localStorage.getItem('todos') || '[]');
+            todos.push({ text: input.value, done: false });
+            localStorage.setItem('todos', JSON.stringify(todos));
             input.value = '';
-            renderTasks(t);
+            renderTodos();
         }
 
-        function toggleTask(t, i) {
-            const tasks = JSON.parse(localStorage.getItem('tk-' + t));
-            tasks[i].done = !tasks[i].done;
-            localStorage.setItem('tk-' + t, JSON.stringify(tasks));
-            renderTasks(t);
+        function toggleTodo(i) {
+            const todos = JSON.parse(localStorage.getItem('todos'));
+            todos[i].done = !todos[i].done;
+            localStorage.setItem('todos', JSON.stringify(todos));
+            renderTodos();
         }
 
-        function renderTasks(t) {
-            const list = document.getElementById('list-' + t);
-            const tasks = JSON.parse(localStorage.getItem('tk-' + t) || '[]');
-            list.innerHTML = tasks.map((tk, i) => `
-                <li class="todo-item ${tk.done ? 'done' : ''}" onclick="toggleTask('${t}', ${i})">
-                    ${tk.text} <span>${tk.done ? '✓' : '○'}</span>
-                </li>
+        function deleteTodo(i) {
+            const todos = JSON.parse(localStorage.getItem('todos'));
+            todos.splice(i, 1);
+            localStorage.setItem('todos', JSON.stringify(todos));
+            renderTodos();
+        }
+
+        function renderTodos() {
+            const list = JSON.parse(localStorage.getItem('todos') || '[]');
+            document.getElementById('todo-list').innerHTML = list.map((t, i) => `
+                <div class="todo-item ${t.done ? 'done' : ''}">
+                    <span onclick="toggleTodo(${i})" style="cursor:pointer">${t.text}</span>
+                    <span class="delete-btn" onclick="deleteTodo(${i})">ELIMINAR</span>
+                </div>
+            `).join('');
+        }
+
+        // --- LÓGICA DE COSTOS ---
+        function addCost() {
+            const name = document.getElementById('cost-name');
+            const val = document.getElementById('cost-val');
+            if(!name.value || !val.value) return;
+            const costs = JSON.parse(localStorage.getItem('costs') || '[]');
+            costs.push({ name: name.value, val: val.value });
+            localStorage.setItem('costs', JSON.stringify(costs));
+            name.value = ''; val.value = '';
+            renderCosts();
+        }
+
+        function deleteCost(i) {
+            const costs = JSON.parse(localStorage.getItem('costs'));
+            costs.splice(i, 1);
+            localStorage.setItem('costs', JSON.stringify(costs));
+            renderCosts();
+        }
+
+        function renderCosts() {
+            const list = JSON.parse(localStorage.getItem('costs') || '[]');
+            document.getElementById('cost-table-body').innerHTML = list.map((c, i) => `
+                <tr>
+                    <td>${c.name}</td>
+                    <td>$${c.val}</td>
+                    <td class="delete-btn" onclick="deleteCost(${i})">✕</td>
+                </tr>
             `).join('');
         }
     </script>
